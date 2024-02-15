@@ -1,7 +1,10 @@
+import { products } from "@/constants";
+import { ProductList } from "@/ui/organisms/ProductList";
+
 export default function Home() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<p>Hello</p>
-		</main>
+		<section className="mx-auto max-w-2xl px-8 py-12 sm:px-6 sm:py-16 md:max-w-4xl lg:max-w-7xl">
+			<ProductList products={products} />
+		</section>
 	);
 }
