@@ -7,7 +7,7 @@ export const ProductCoverImage = ({ alt, src }: { alt: string; src: string }) =>
 				src={src}
 				alt={alt}
 				width={320}
-				height={480}
+				height={320}
 				className="h-full w-full object-cover object-center p-4 transition-transform hover:scale-105"
 			/>
 		</div>

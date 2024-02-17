@@ -2,25 +2,31 @@
 
 import Link from "next/link";
 import clsx from "clsx";
-import { type Route } from "next";
 import { usePathname } from "next/navigation";
 
-export const ActiveLink = <T extends string>({
+type ActiveLinkProps = {
+	href: string;
+	children: React.ReactNode;
+	className?: string;
+	activeClassName?: string;
+};
+
+export const ActiveLink = ({
 	href,
 	children,
-}: {
-	href: Route<T> | URL;
-	children: React.ReactNode;
-}) => {
+	className = "block py-2 text-sm transition hover:text-blue-400",
+	activeClassName = "border-b border-blue-400 text-blue-400",
+}: ActiveLinkProps) => {
 	const pathName = usePathname();
 	const isActive = pathName === href;
-	const activeClassName = isActive && "text-blue-500";
 
 	return (
-		<li>
-			<Link aria-current={isActive} href={href} className={clsx("text-sm", activeClassName)}>
-				{children}
-			</Link>
-		</li>
+		<Link
+			aria-current={isActive}
+			href={{ pathname: href }}
+			className={clsx(className, { [activeClassName]: isActive })}
+		>
+			{children}
+		</Link>
 	);
 };
