@@ -1,4 +1,7 @@
+import { env } from "process";
 import { type ProductItemType } from "@/types";
+
+export const apiURL = env.API_URL;
 
 export const products: ProductItemType[] = [
 	{
