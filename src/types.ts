@@ -8,3 +8,9 @@ export type ProductItemType = {
 		src: string;
 	};
 };
+
+export type AppRoutes = {
+	id: string;
+	path: string;
+	label: string;
+};
