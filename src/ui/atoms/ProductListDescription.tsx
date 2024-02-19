@@ -5,7 +5,7 @@ type ProductDescriptionProps = {
 	product: ProductItemResponse;
 };
 
-export const ProductDescription = ({ product }: ProductDescriptionProps) => {
+export const ProductListDescription = ({ product }: ProductDescriptionProps) => {
 	return (
 		<div className="mt-2 flex justify-between">
 			<div>

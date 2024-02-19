@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { type ProductItemResponse } from "@/types";
-import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
-import { ProductDescription } from "@/ui/atoms/ProductDescription";
+import { ProductListCoverImage } from "@/ui/atoms/ProductListCoverImage";
+import { ProductListDescription } from "@/ui/atoms/ProductListDescription";
 
 type ProductListItemProps = {
 	product: ProductItemResponse;
@@ -12,8 +12,8 @@ export const ProductListItem = ({ product }: ProductListItemProps) => {
 		<li>
 			<Link href={{ pathname: `/product/${product.id}` }}>
 				<article>
-					<ProductCoverImage alt={product.title} src={product.image} />
-					<ProductDescription product={product} />
+					<ProductListCoverImage alt={product.title} src={product.image} />
+					<ProductListDescription product={product} />
 				</article>
 			</Link>
 		</li>
