@@ -1,3 +1,4 @@
+import { type Route } from "next";
 import { appRoutes } from "@/routes";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
@@ -8,7 +9,7 @@ export const Navigation = () => {
 				{appRoutes.map((route) => {
 					return (
 						<li key={route.id}>
-							<ActiveLink href={route.path}>{route.label}</ActiveLink>
+							<ActiveLink href={route.path as Route}>{route.label}</ActiveLink>
 						</li>
 					);
 				})}
