@@ -1,8 +1,8 @@
-import { type ProductItemType } from "@/types";
+import { type ProductItemResponse } from "@/types";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
 type ProductListProps = {
-	products: ProductItemType[];
+	products: ProductItemResponse[];
 };
 
 export const ProductList = ({ products }: ProductListProps) => {
