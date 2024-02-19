@@ -19,7 +19,11 @@ export const ActiveLink = <T extends string>({
 	activeClassName = "border-b border-blue-400 text-blue-400",
 }: ActiveLinkProps<T>) => {
 	const pathName = usePathname();
-	const isActive = pathName === href;
+
+	const isActive =
+		href === "/products"
+			? pathName === "/products" || pathName.startsWith("/product")
+			: pathName === href;
 
 	return (
 		<Link
