@@ -8,8 +8,8 @@ export const formatMoney = (price: number, currency: string) => {
 	}).format(price / 100);
 };
 
-export const getProductsList = async () => {
-	const response = await fetch(`${apiURL}/products?take=20`);
+export const getProductsList = async (pageNumber = 1) => {
+	const response = await fetch(`${apiURL}/products?take=20&offset=${pageNumber}`);
 
 	if (!response.ok) {
 		throw new Error("Failed to fetch products");
