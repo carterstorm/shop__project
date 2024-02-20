@@ -1,5 +1,6 @@
-import { apiURL } from "@/constants";
 import { type ProductItemResponse } from "@/types";
+
+const apiURL = process.env.API_URL;
 
 export const formatMoney = (price: number, currency: string) => {
 	return new Intl.NumberFormat("en-US", {
