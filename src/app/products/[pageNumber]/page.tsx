@@ -2,6 +2,12 @@ import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsList } from "@/utils";
 
+export const generateStaticParams = async () => {
+	return [...Array(20).keys()].map((page) => ({
+		params: { pageNumber: page + 1 },
+	}));
+};
+
 export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
 	const pageNumber = parseInt(params.pageNumber) || 1;
 	const products = await getProductsList(pageNumber);
