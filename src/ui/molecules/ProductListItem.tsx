@@ -1,18 +1,21 @@
-import { type ProductItemType } from "@/types";
-import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
-import { ProductDescription } from "@/ui/atoms/ProductDescription";
+import Link from "next/link";
+import { type ProductItemResponse } from "@/types";
+import { ProductListCoverImage } from "@/ui/atoms/ProductListCoverImage";
+import { ProductListDescription } from "@/ui/atoms/ProductListDescription";
 
 type ProductListItemProps = {
-	product: ProductItemType;
+	product: ProductItemResponse;
 };
 
 export const ProductListItem = ({ product }: ProductListItemProps) => {
 	return (
 		<li>
-			<article>
-				<ProductCoverImage alt={product.coveredImage.alt} src={product.coveredImage.src} />
-				<ProductDescription product={product} />
-			</article>
+			<Link href={{ pathname: `/product/${product.id}` }}>
+				<article>
+					<ProductListCoverImage alt={product.title} src={product.image} />
+					<ProductListDescription product={product} />
+				</article>
+			</Link>
 		</li>
 	);
 };

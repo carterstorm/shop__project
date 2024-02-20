@@ -2,25 +2,35 @@
 
 import Link from "next/link";
 import clsx from "clsx";
-import { type Route } from "next";
 import { usePathname } from "next/navigation";
+import { type Route } from "next";
+
+type ActiveLinkProps<T extends string> = {
+	href: Route<T>;
+	children: React.ReactNode;
+	className?: string;
+	activeClassName?: string;
+	exact?: boolean;
+	disabled?: boolean;
+};
 
 export const ActiveLink = <T extends string>({
 	href,
+	exact,
 	children,
-}: {
-	href: Route<T> | URL;
-	children: React.ReactNode;
-}) => {
+	className,
+	activeClassName,
+}: ActiveLinkProps<T>) => {
 	const pathName = usePathname();
-	const isActive = pathName === href;
-	const activeClassName = isActive && "text-blue-500";
+	const isActive = exact ? pathName === href : pathName.startsWith(href);
 
 	return (
-		<li>
-			<Link aria-current={isActive} href={href} className={clsx("text-sm", activeClassName)}>
-				{children}
-			</Link>
-		</li>
+		<Link
+			aria-current={isActive}
+			href={href}
+			className={clsx(className, isActive && activeClassName)}
+		>
+			{children}
+		</Link>
 	);
 };
