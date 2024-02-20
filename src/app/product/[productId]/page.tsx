@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
 import { ProductInformation } from "@/ui/molecules/ProductInformation";
+import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { getProductById } from "@/utils";
 
 type SingleProductPageProps = {
@@ -12,9 +14,14 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 	const product = await getProductById(params.productId);
 
 	return (
-		<section className="grid grid-cols-2 gap-8">
-			<SinglePageProductImage product={product} />
-			<ProductInformation product={product} />
+		<section>
+			<div className="grid grid-cols-2 gap-8">
+				<SinglePageProductImage product={product} />
+				<ProductInformation product={product} />
+			</div>
+			<Suspense>
+				<SuggestedProducts />
+			</Suspense>
 		</section>
 	);
 }
