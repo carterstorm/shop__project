@@ -10,25 +10,23 @@ type ActiveLinkProps<T extends string> = {
 	children: React.ReactNode;
 	className?: string;
 	activeClassName?: string;
+	exact?: boolean;
 };
 
 export const ActiveLink = <T extends string>({
 	href,
+	exact = true,
 	children,
 	className = "block py-2 text-sm transition hover:text-blue-400",
 	activeClassName = "border-b border-blue-400 text-blue-400",
 }: ActiveLinkProps<T>) => {
 	const pathName = usePathname();
-
-	const isActive =
-		href === "/products"
-			? pathName === "/products" || pathName.startsWith("/product")
-			: pathName === href;
+	const isActive = exact ? pathName === href : pathName.startsWith(href);
 
 	return (
 		<Link
 			aria-current={isActive}
-			href={{ pathname: href }}
+			href={href}
 			className={clsx(className, { [activeClassName]: isActive })}
 		>
 			{children}
