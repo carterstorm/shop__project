@@ -10,7 +10,7 @@ export const appRoutes: AppRoutes[] = [
 	{
 		id: "2",
 		path: "/products",
-		label: "Products",
+		label: "All",
 		exact: false,
 	},
 ];

@@ -10,7 +10,7 @@ type ProductListItemProps = {
 export const ProductListItem = ({ product }: ProductListItemProps) => {
 	return (
 		<li>
-			<Link href={{ pathname: `/product/${product.id}` }}>
+			<Link href={`/product/${product.id}`}>
 				<article>
 					<ProductListCoverImage alt={product.title} src={product.image} />
 					<ProductListDescription product={product} />
