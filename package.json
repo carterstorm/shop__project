@@ -26,6 +26,7 @@
 		"@graphql-codegen/cli": "5.0.2",
 		"@graphql-codegen/client-preset": "4.2.4",
 		"@next/env": "^14.1.0",
+		"@parcel/watcher": "^2.4.1",
 		"@tailwindcss/typography": "^0.5.10",
 		"@types/node": "^20",
 		"@types/react": "^18",

@@ -274,6 +274,13 @@ export type SortDirection =
 
 export type ProductsListItemFragment = { id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string }> };
 
+export type ProductsGetListQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type ProductsGetListQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string }> }> } };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -303,3 +310,23 @@ export const ProductsListItemFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductsListItem"}) as unknown as TypedDocumentString<ProductsListItemFragment, unknown>;
+export const ProductsGetListDocument = new TypedDocumentString(`
+    query ProductsGetList($take: Int) {
+  products(take: $take) {
+    data {
+      id
+      name
+      price
+      description
+      rating
+      images {
+        alt
+        url
+      }
+      categories {
+        name
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;

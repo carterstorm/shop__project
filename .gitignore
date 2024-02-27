@@ -11,6 +11,9 @@
 # testing
 /coverage
 
+#graphql
+gql/
+
 # next.js
 /.next/
 /out/

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { type Metadata } from "next";
+// import { type Metadata } from "next";
 import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
 import { ProductInformation } from "@/ui/molecules/ProductInformation";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
@@ -11,28 +11,28 @@ type SingleProductPageProps = {
 	};
 };
 
-export const generateMetadata = async ({
-	params,
-}: {
-	params: { productId: string };
-}): Promise<Metadata> => {
-	const product = await getProductById(params.productId);
+// export const generateMetadata = async ({
+// 	params,
+// }: {
+// 	params: { productId: string };
+// }): Promise<Metadata> => {
+// 	const product = await getProductById(params.productId);
 
-	return {
-		title: `${product.title}`,
-		description: `${product.description}`,
-		openGraph: {
-			title: `${product.title}`,
-			description: `${product.description}`,
-			images: [
-				{
-					url: `${product.image}`,
-					alt: `${product.title}`,
-				},
-			],
-		},
-	};
-};
+// 	return {
+// 		title: `${product.title}`,
+// 		description: `${product.description}`,
+// 		openGraph: {
+// 			title: `${product.title}`,
+// 			description: `${product.description}`,
+// 			images: [
+// 				{
+// 					url: `${product.image}`,
+// 					alt: `${product.title}`,
+// 				},
+// 			],
+// 		},
+// 	};
+// };
 
 export default async function SingleProductPage({ params }: SingleProductPageProps) {
 	const product = await getProductById(params.productId);
