@@ -3,7 +3,7 @@ import { type Metadata } from "next";
 import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
 import { ProductInformation } from "@/ui/molecules/ProductInformation";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
-import { getProductById } from "@/utils";
+import { getProductById } from "@/api/product";
 
 type SingleProductPageProps = {
 	params: {
