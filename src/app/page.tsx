@@ -1,5 +1,5 @@
+import { getProductsListByPageNumber } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductsListByPageNumber } from "@/utils";
 
 export default async function Home() {
 	const suggestedProducts = await getProductsListByPageNumber();

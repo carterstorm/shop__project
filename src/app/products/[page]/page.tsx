@@ -1,7 +1,7 @@
+import { getNumberOfAllPages, getProductsListByPageNumber } from "@/api/products";
 import { numberOfProductsByPage } from "@/constants";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getNumberOfAllPages, getProductsListByPageNumber } from "@/utils";
 
 export const generateStaticParams = async () => {
 	const numberOfAllPages = await getNumberOfAllPages(numberOfProductsByPage);
