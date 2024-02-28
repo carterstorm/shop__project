@@ -1,15 +1,15 @@
-import { Suspense } from "react";
-// import { type Metadata } from "next";
-import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
-import { ProductInformation } from "@/ui/molecules/ProductInformation";
-import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
-import { getProductById } from "@/api/product";
+// import { Suspense } from "react";
+// // import { type Metadata } from "next";
+// import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
+// import { ProductInformation } from "@/ui/molecules/ProductInformation";
+// import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
+// import { getProductById } from "@/api/product";
 
-type SingleProductPageProps = {
-	params: {
-		productId: string;
-	};
-};
+// type SingleProductPageProps = {
+// 	params: {
+// 		productId: string;
+// 	};
+// };
 
 // export const generateMetadata = async ({
 // 	params,
@@ -34,18 +34,19 @@ type SingleProductPageProps = {
 // 	};
 // };
 
-export default async function SingleProductPage({ params }: SingleProductPageProps) {
-	const product = await getProductById(params.productId);
+export default async function SingleProductPage() {
+	// export default async function SingleProductPage({ params }: SingleProductPageProps) {
+	// const product = await getProductById(params.productId);
 
 	return (
 		<section>
-			<div className="grid grid-cols-2 gap-8">
+			{/* <div className="grid grid-cols-2 gap-8">
 				<SinglePageProductImage product={product} />
 				<ProductInformation product={product} />
 			</div>
 			<Suspense>
 				<SuggestedProducts />
-			</Suspense>
+			</Suspense> */}
 		</section>
 	);
 }

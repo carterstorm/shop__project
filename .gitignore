@@ -12,7 +12,7 @@
 /coverage
 
 #graphql
-gql/
+src/gql/
 
 # next.js
 /.next/

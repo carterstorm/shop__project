@@ -1,10 +1,5 @@
-// import { getProductsListByPageNumber } from "@/api/products";
-// import { ProductList } from "@/ui/organisms/ProductList";
+import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 
 export default async function Home() {
-	// const suggestedProducts = await getProductsListByPageNumber();
-
-	return <></>;
-
-	// <ProductList products={suggestedProducts.slice(-4)} />;
+	return <SuggestedProducts />;
 }

@@ -1,9 +1,14 @@
-import { type ProductItemResponse } from "@/types";
+import NextImage from "next/image";
+import { type ProductsListItemFragment } from "@/gql/graphql";
 
-export const SinglePageProductImage = ({ product }: { product: ProductItemResponse }) => {
+export const SinglePageProductImage = ({ product }: { product: ProductsListItemFragment }) => {
 	return (
 		<div className="flex justify-center">
-			<img src={product.image} alt={product.title} className="w-96 rounded-lg object-contain" />
+			<NextImage
+				src={product.images[0].url}
+				alt={product.name}
+				className="w-96 rounded-lg object-contain"
+			/>
 		</div>
 	);
 };
