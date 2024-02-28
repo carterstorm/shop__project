@@ -1,5 +1,9 @@
-fragment CategoryListItem on Category {
-	id
-	name
-	slug
+query CategoriesGetList {
+	categories {
+		data {
+			id
+			name
+			slug
+		}
+	}
 }

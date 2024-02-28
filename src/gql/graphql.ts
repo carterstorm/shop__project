@@ -272,7 +272,10 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
-export type CategoryListItemFragment = { id: string, name: string, slug: string };
+export type CategoriesGetListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, name: string, slug: string }> } };
 
 export type CategoryGetItemByIdQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -281,10 +284,7 @@ export type CategoryGetItemByIdQueryVariables = Exact<{
 
 export type CategoryGetItemByIdQuery = { category?: { slug: string, products: Array<{ id: string, name: string, price: number, description: string, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
 
-export type CategoriesGetListQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, name: string, slug: string }> } };
+export type CategoryListItemFragment = { id: string, name: string, slug: string };
 
 export type ProductGetItemByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -345,6 +345,17 @@ export const ProductsListItemFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductsListItem"}) as unknown as TypedDocumentString<ProductsListItemFragment, unknown>;
+export const CategoriesGetListDocument = new TypedDocumentString(`
+    query CategoriesGetList {
+  categories {
+    data {
+      id
+      name
+      slug
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
 export const CategoryGetItemByIdDocument = new TypedDocumentString(`
     query CategoryGetItemById($slug: String) {
   category(slug: $slug) {
@@ -365,17 +376,6 @@ export const CategoryGetItemByIdDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoryGetItemByIdQuery, CategoryGetItemByIdQueryVariables>;
-export const CategoriesGetListDocument = new TypedDocumentString(`
-    query CategoriesGetList {
-  categories {
-    data {
-      id
-      name
-      slug
-    }
-  }
-}
-    `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
 export const ProductGetItemByIdDocument = new TypedDocumentString(`
     query ProductGetItemById($id: ID!) {
   product(id: $id) {
