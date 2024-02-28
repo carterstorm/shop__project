@@ -277,12 +277,12 @@ export type CategoriesGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, name: string, slug: string }> } };
 
-export type CategoryGetItemByIdQueryVariables = Exact<{
+export type CategoryGetItemBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type CategoryGetItemByIdQuery = { category?: { slug: string, products: Array<{ id: string, name: string, price: number, description: string, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
+export type CategoryGetItemBySlugQuery = { category?: { slug: string, products: Array<{ id: string, name: string, price: number, description: string, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
 
 export type CategoryListItemFragment = { id: string, name: string, slug: string };
 
@@ -356,8 +356,8 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
-export const CategoryGetItemByIdDocument = new TypedDocumentString(`
-    query CategoryGetItemById($slug: String) {
+export const CategoryGetItemBySlugDocument = new TypedDocumentString(`
+    query CategoryGetItemBySlug($slug: String) {
   category(slug: $slug) {
     slug
     products {
@@ -375,7 +375,7 @@ export const CategoryGetItemByIdDocument = new TypedDocumentString(`
     }
   }
 }
-    `) as unknown as TypedDocumentString<CategoryGetItemByIdQuery, CategoryGetItemByIdQueryVariables>;
+    `) as unknown as TypedDocumentString<CategoryGetItemBySlugQuery, CategoryGetItemBySlugQueryVariables>;
 export const ProductGetItemByIdDocument = new TypedDocumentString(`
     query ProductGetItemById($id: ID!) {
   product(id: $id) {

@@ -1,8 +1,8 @@
-import { CategoryGetItemByIdDocument } from "@/gql/graphql";
+import { CategoryGetItemBySlugDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
-export const getCategoryById = async (slug: string) => {
-	const graphqlResponse = await executeGraphQL(CategoryGetItemByIdDocument, { slug });
+export const getCategoryBySlug = async (slug: string) => {
+	const graphqlResponse = await executeGraphQL(CategoryGetItemBySlugDocument, { slug });
 
 	if (!graphqlResponse) {
 		throw new Error("Failed to fetch category");
