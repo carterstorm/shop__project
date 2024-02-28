@@ -11,9 +11,6 @@
 # testing
 /coverage
 
-#graphql
-src/gql/
-
 # next.js
 /.next/
 /out/
