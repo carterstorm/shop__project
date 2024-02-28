@@ -274,6 +274,13 @@ export type SortDirection =
 
 export type CategoryListItemFragment = { id: string, name: string, slug: string };
 
+export type CategoryGetItemByIdQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CategoryGetItemByIdQuery = { category?: { slug: string, products: Array<{ id: string, name: string, price: number, description: string, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
+
 export type CategoriesGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -338,6 +345,26 @@ export const ProductsListItemFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductsListItem"}) as unknown as TypedDocumentString<ProductsListItemFragment, unknown>;
+export const CategoryGetItemByIdDocument = new TypedDocumentString(`
+    query CategoryGetItemById($slug: String) {
+  category(slug: $slug) {
+    slug
+    products {
+      id
+      name
+      price
+      description
+      images {
+        url
+      }
+      categories {
+        name
+        description
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CategoryGetItemByIdQuery, CategoryGetItemByIdQueryVariables>;
 export const CategoriesGetListDocument = new TypedDocumentString(`
     query CategoriesGetList {
   categories {

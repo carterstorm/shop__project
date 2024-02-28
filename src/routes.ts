@@ -19,4 +19,22 @@ export const appRoutes: AppRoutes[] = [
 		label: "Categories",
 		exact: false,
 	},
+	{
+		id: "4",
+		path: "/categories/accessories",
+		label: "Accessories",
+		exact: false,
+	},
+	{
+		id: "5",
+		path: "/categories/hoodies",
+		label: "Hoodies",
+		exact: false,
+	},
+	{
+		id: "6",
+		path: "/categories/t-shirts",
+		label: "T-shirts",
+		exact: false,
+	},
 ];

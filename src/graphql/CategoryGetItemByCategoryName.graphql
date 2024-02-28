@@ -1,0 +1,18 @@
+query CategoryGetItemById($slug: String) {
+	category(slug: $slug) {
+		slug
+		products {
+			id
+			name
+			price
+			description
+			images {
+				url
+			}
+			categories {
+				name
+				description
+			}
+		}
+	}
+}

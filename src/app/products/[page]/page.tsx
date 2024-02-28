@@ -1,10 +1,10 @@
 import { Pagination } from "@/ui/molecules/Pagination";
-import { getNumberOfAllPages, getProductsListByPageNumber } from "@/api/products";
+import { getNumberOfAllProductsPages, getProductsListByPageNumber } from "@/api/products";
 import { numberOfProductsByPage } from "@/constants";
 import { ProductList } from "@/ui/organisms/ProductList";
 
 export const generateStaticParams = async () => {
-	const numberOfAllPages = await getNumberOfAllPages();
+	const numberOfAllPages = await getNumberOfAllProductsPages();
 
 	return Array.from({ length: numberOfAllPages }, (_, i) => ({ page: (i + 1).toString() }));
 };
@@ -14,7 +14,7 @@ export default async function ProductsPage({ params }: { params: { page: string 
 	const offset = activePageNumber * numberOfProductsByPage - numberOfProductsByPage;
 
 	const products = await getProductsListByPageNumber(numberOfProductsByPage, offset);
-	const numberOfAllPages = await getNumberOfAllPages();
+	const numberOfAllPages = await getNumberOfAllProductsPages();
 
 	return (
 		<div className="flex flex-col gap-10">
