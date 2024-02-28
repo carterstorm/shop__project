@@ -1,9 +1,10 @@
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
-import { ProductInformation } from "@/ui/molecules/ProductInformation";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
-import { getProductById } from "@/utils";
+import { getProductById } from "@/api/product";
+import { ProductInformation } from "@/ui/molecules/ProductInformation";
 
 type SingleProductPageProps = {
 	params: {
@@ -18,16 +19,20 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
 
+	if (!product) {
+		return { title: "Product not found" };
+	}
+
 	return {
-		title: `${product.title}`,
+		title: `${product.name}`,
 		description: `${product.description}`,
 		openGraph: {
-			title: `${product.title}`,
+			title: `${product.name}`,
 			description: `${product.description}`,
 			images: [
 				{
-					url: `${product.image}`,
-					alt: `${product.title}`,
+					url: `${product.images[0].url}`,
+					alt: `${product.name}`,
 				},
 			],
 		},
@@ -36,6 +41,10 @@ export const generateMetadata = async ({
 
 export default async function SingleProductPage({ params }: SingleProductPageProps) {
 	const product = await getProductById(params.productId);
+
+	if (!product) {
+		return notFound();
+	}
 
 	return (
 		<section>
