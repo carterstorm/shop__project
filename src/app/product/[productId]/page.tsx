@@ -47,7 +47,7 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 	}
 
 	return (
-		<section>
+		<section className="mx-auto lg:max-w-7xl lg:px-0">
 			<div className="grid grid-cols-2 gap-8">
 				<SinglePageProductImage product={product} />
 				<ProductInformation product={product} />

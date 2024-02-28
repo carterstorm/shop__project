@@ -13,7 +13,7 @@ export default async function ProductsPage({ params }: { params: { page: string 
 	const activePageNumber = parseInt(params.page) > 0 ? parseInt(params.page) : 1;
 	const offset = activePageNumber * numberOfProductsByPage - numberOfProductsByPage;
 
-	const products = await getProductsListByPageNumber(8, offset);
+	const products = await getProductsListByPageNumber(numberOfProductsByPage, offset);
 	const numberOfAllPages = await getNumberOfAllPages();
 
 	return (

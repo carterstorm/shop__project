@@ -272,6 +272,13 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
+export type CategoryListItemFragment = { id: string, name: string, slug: string };
+
+export type CategoriesGetListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, name: string, slug: string }> } };
+
 export type ProductGetItemByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -308,6 +315,13 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
+export const CategoryListItemFragmentDoc = new TypedDocumentString(`
+    fragment CategoryListItem on Category {
+  id
+  name
+  slug
+}
+    `, {"fragmentName":"CategoryListItem"}) as unknown as TypedDocumentString<CategoryListItemFragment, unknown>;
 export const ProductsListItemFragmentDoc = new TypedDocumentString(`
     fragment ProductsListItem on Product {
   id
@@ -324,6 +338,17 @@ export const ProductsListItemFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductsListItem"}) as unknown as TypedDocumentString<ProductsListItemFragment, unknown>;
+export const CategoriesGetListDocument = new TypedDocumentString(`
+    query CategoriesGetList {
+  categories {
+    data {
+      id
+      name
+      slug
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
 export const ProductGetItemByIdDocument = new TypedDocumentString(`
     query ProductGetItemById($id: ID!) {
   product(id: $id) {

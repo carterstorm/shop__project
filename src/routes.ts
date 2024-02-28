@@ -13,4 +13,10 @@ export const appRoutes: AppRoutes[] = [
 		label: "All",
 		exact: false,
 	},
+	{
+		id: "3",
+		path: "/categories",
+		label: "Categories",
+		exact: false,
+	},
 ];
