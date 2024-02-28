@@ -7,7 +7,7 @@ type CategoryListItemProps = {
 	category: CategoryListItemFragment;
 };
 
-export const CategoryListItem = ({ category }: CategoryListItemProps) => {
+export const CategoryCardListItem = ({ category }: CategoryListItemProps) => {
 	return (
 		<Link
 			href={`/categories/${category.slug}/1` as Route}
