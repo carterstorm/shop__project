@@ -12,6 +12,7 @@ query ProductsGetList($take: Int, $skip: Int) {
 			}
 			categories {
 				name
+				description
 			}
 		}
 	}

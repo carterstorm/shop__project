@@ -1,5 +1,9 @@
-// import { type ProductItemResponse } from "@/types";
+import { type ProductsListItemFragment } from "@/gql/graphql";
 
-// export const SingleProductLongDescription = ({ product }: { product: ProductItemResponse }) => {
-// 	return <p>{product.longDescription}</p>;
-// };
+export const SingleProductLongDescription = ({
+	product,
+}: {
+	product: ProductsListItemFragment;
+}) => {
+	return <p>{product.description}</p>;
+};

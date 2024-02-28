@@ -24,5 +24,5 @@ export const getProductsListByPageNumber = async (take: number = 4, skip: number
 		throw new Error("Failed to fetch products");
 	}
 
-	return graphqlResponse.products;
+	return graphqlResponse.products.data;
 };

@@ -1,14 +1,14 @@
-// import { apiURL } from "@/constants";
-// import { type ProductItemResponse } from "@/types";
+import { ProductGetItemByIdDocument } from "@/gql/graphql";
+import { executeGraphQL } from "@/utils/executeGraphQL";
 
-// export const getProductById = async (id: ProductItemResponse["id"]) => {
-// 	const response = await fetch(`${apiURL}/products/${id}`);
+export const getProductById = async (id: string) => {
+	const graphqlResponse = await executeGraphQL(ProductGetItemByIdDocument, {
+		id,
+	});
 
-// 	if (!response.ok) {
-// 		throw new Error("Failed to fetch product");
-// 	}
+	if (!graphqlResponse) {
+		throw new Error("Failed to fetch products");
+	}
 
-// 	const product = (await response.json()) as ProductItemResponse;
-
-// 	return product;
-// };
+	return graphqlResponse.product;
+};

@@ -272,7 +272,14 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
-export type ProductsListItemFragment = { id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string }> };
+export type ProductGetItemByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductGetItemByIdQuery = { product?: { id: string, name: string, description: string, price: number, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> } | null };
+
+export type ProductsListItemFragment = { id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> };
 
 export type ProductsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -280,7 +287,7 @@ export type ProductsGetListQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string }> }> } };
+export type ProductsGetListQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, description: string }> }> } };
 
 export type ProductsGetListLengthQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -313,9 +320,28 @@ export const ProductsListItemFragmentDoc = new TypedDocumentString(`
   }
   categories {
     name
+    description
   }
 }
     `, {"fragmentName":"ProductsListItem"}) as unknown as TypedDocumentString<ProductsListItemFragment, unknown>;
+export const ProductGetItemByIdDocument = new TypedDocumentString(`
+    query ProductGetItemById($id: ID!) {
+  product(id: $id) {
+    id
+    name
+    description
+    price
+    rating
+    images {
+      url
+    }
+    categories {
+      name
+      description
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductGetItemByIdQuery, ProductGetItemByIdQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($take: Int, $skip: Int) {
   products(take: $take, skip: $skip) {
@@ -331,6 +357,7 @@ export const ProductsGetListDocument = new TypedDocumentString(`
       }
       categories {
         name
+        description
       }
     }
   }

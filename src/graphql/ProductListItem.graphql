@@ -9,5 +9,6 @@ fragment ProductsListItem on Product {
 	}
 	categories {
 		name
+		description
 	}
 }

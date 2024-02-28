@@ -1,52 +1,60 @@
-// import { Suspense } from "react";
-// // import { type Metadata } from "next";
-// import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
-// import { ProductInformation } from "@/ui/molecules/ProductInformation";
-// import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
-// import { getProductById } from "@/api/product";
+import { Suspense } from "react";
+import { notFound } from "next/navigation";
+import { type Metadata } from "next";
+import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
+import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
+import { getProductById } from "@/api/product";
+import { ProductInformation } from "@/ui/molecules/ProductInformation";
 
-// type SingleProductPageProps = {
-// 	params: {
-// 		productId: string;
-// 	};
-// };
+type SingleProductPageProps = {
+	params: {
+		productId: string;
+	};
+};
 
-// export const generateMetadata = async ({
-// 	params,
-// }: {
-// 	params: { productId: string };
-// }): Promise<Metadata> => {
-// 	const product = await getProductById(params.productId);
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { productId: string };
+}): Promise<Metadata> => {
+	const product = await getProductById(params.productId);
 
-// 	return {
-// 		title: `${product.title}`,
-// 		description: `${product.description}`,
-// 		openGraph: {
-// 			title: `${product.title}`,
-// 			description: `${product.description}`,
-// 			images: [
-// 				{
-// 					url: `${product.image}`,
-// 					alt: `${product.title}`,
-// 				},
-// 			],
-// 		},
-// 	};
-// };
+	if (!product) {
+		return { title: "Product not found" };
+	}
 
-export default async function SingleProductPage() {
-	// export default async function SingleProductPage({ params }: SingleProductPageProps) {
-	// const product = await getProductById(params.productId);
+	return {
+		title: `${product.name}`,
+		description: `${product.description}`,
+		openGraph: {
+			title: `${product.name}`,
+			description: `${product.description}`,
+			images: [
+				{
+					url: `${product.images[0].url}`,
+					alt: `${product.name}`,
+				},
+			],
+		},
+	};
+};
+
+export default async function SingleProductPage({ params }: SingleProductPageProps) {
+	const product = await getProductById(params.productId);
+
+	if (!product) {
+		return notFound();
+	}
 
 	return (
 		<section>
-			{/* <div className="grid grid-cols-2 gap-8">
+			<div className="grid grid-cols-2 gap-8">
 				<SinglePageProductImage product={product} />
 				<ProductInformation product={product} />
 			</div>
 			<Suspense>
 				<SuggestedProducts />
-			</Suspense> */}
+			</Suspense>
 		</section>
 	);
 }

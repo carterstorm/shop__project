@@ -7,5 +7,5 @@ export const SuggestedProducts = async () => {
 
 	await sleep(1000);
 
-	return <ProductList products={suggestedProducts.data.slice(-4)} />;
+	return <ProductList products={suggestedProducts.slice(-4)} />;
 };

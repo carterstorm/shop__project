@@ -18,7 +18,7 @@ export default async function ProductsPage({ params }: { params: { page: string 
 
 	return (
 		<div className="flex flex-col gap-10">
-			<ProductList products={products.data} />
+			<ProductList products={products} />
 			<Pagination activePageNumber={activePageNumber} numberOfAllPages={numberOfAllPages} />
 		</div>
 	);
