@@ -1,4 +1,4 @@
-query CategoryGetItemBySlug($slug: String) {
+query CategoriesGetItemsBySlug($slug: String) {
 	category(slug: $slug) {
 		slug
 		products {

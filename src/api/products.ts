@@ -1,4 +1,4 @@
-import { numberOfProductsByPage } from "@/constants";
+import { numberOfAllProductsByPage } from "@/constants";
 import { ProductsGetListDocument, ProductsGetListLengthDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
@@ -10,7 +10,7 @@ export const getNumberOfAllProductsPages = async () => {
 	}
 
 	const numberOfAllProducts = graphqlResponse.products.meta.total;
-	const numberOfAllPages = Math.ceil(numberOfAllProducts / numberOfProductsByPage);
+	const numberOfAllPages = Math.ceil(numberOfAllProducts / numberOfAllProductsByPage);
 	return numberOfAllPages;
 };
 

@@ -7,7 +7,6 @@ query ProductsGetList($take: Int, $skip: Int) {
 			description
 			rating
 			images {
-				alt
 				url
 			}
 			categories {

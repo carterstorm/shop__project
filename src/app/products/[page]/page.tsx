@@ -1,6 +1,7 @@
+import { notFound } from "next/navigation";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { getNumberOfAllProductsPages, getProductsListByPageNumber } from "@/api/products";
-import { numberOfProductsByPage } from "@/constants";
+import { numberOfAllProductsByPage } from "@/constants";
 import { ProductList } from "@/ui/organisms/ProductList";
 
 export const generateStaticParams = async () => {
@@ -11,15 +12,23 @@ export const generateStaticParams = async () => {
 
 export default async function ProductsPage({ params }: { params: { page: string } }) {
 	const activePageNumber = parseInt(params.page) > 0 ? parseInt(params.page) : 1;
-	const offset = activePageNumber * numberOfProductsByPage - numberOfProductsByPage;
+	const offset = activePageNumber * numberOfAllProductsByPage - numberOfAllProductsByPage;
 
-	const products = await getProductsListByPageNumber(numberOfProductsByPage, offset);
+	const products = await getProductsListByPageNumber(numberOfAllProductsByPage, offset);
 	const numberOfAllPages = await getNumberOfAllProductsPages();
+
+	if (!products && !numberOfAllPages) {
+		return notFound();
+	}
 
 	return (
 		<div className="flex flex-col gap-10">
 			<ProductList products={products} />
-			<Pagination activePageNumber={activePageNumber} numberOfAllPages={numberOfAllPages} />
+			<Pagination
+				path="products"
+				activePageNumber={activePageNumber}
+				numberOfAllPages={numberOfAllPages}
+			/>
 		</div>
 	);
 }

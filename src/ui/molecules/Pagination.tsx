@@ -1,16 +1,19 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 type PaginationProps = {
 	activePageNumber: number;
 	siblings?: number;
 	numberOfAllPages: number;
+	path: string;
 };
 
 export const Pagination = ({
 	activePageNumber,
 	siblings = 2,
 	numberOfAllPages,
+	path,
 }: PaginationProps) => {
 	const firstPage = 1;
 	const siblingsArray = [...Array(siblings).keys()];
@@ -26,12 +29,12 @@ export const Pagination = ({
 		<nav className="flex justify-center">
 			<ul className="flex items-center gap-6" aria-label="pagination">
 				{activePageNumber >= 4 && (
-					<ActiveLink href={`/products/${firstPage}`}>
+					<ActiveLink href={`/${path}/${firstPage}` as Route}>
 						<ChevronsLeft strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
 				{activePageNumber !== firstPage && (
-					<ActiveLink href={`/products/${activePageNumber - 1}`}>
+					<ActiveLink href={`/${path}/${activePageNumber - 1}` as Route}>
 						<ChevronLeft strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
@@ -39,7 +42,7 @@ export const Pagination = ({
 					return (
 						<ActiveLink
 							key={index}
-							href={`/products/${page}`}
+							href={`/${path}/${page}` as Route}
 							className="font-medium"
 							activeClassName="text-slate-100 bg-blue-500 rounded-md px-3 py-1"
 						>
@@ -48,12 +51,12 @@ export const Pagination = ({
 					);
 				})}
 				{activePageNumber !== numberOfAllPages && (
-					<ActiveLink href={`/products/${activePageNumber + 1}`}>
+					<ActiveLink href={`/${path}/${activePageNumber + 1}` as Route}>
 						<ChevronRight strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
 				{activePageNumber <= numberOfAllPages - 3 && (
-					<ActiveLink href={`/products/${numberOfAllPages}`}>
+					<ActiveLink href={`/${path}/${numberOfAllPages}` as Route}>
 						<ChevronsRight strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
