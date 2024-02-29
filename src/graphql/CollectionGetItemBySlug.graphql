@@ -1,0 +1,21 @@
+query CollectionGetItemBySlug($slug: String) {
+	collection(slug: $slug) {
+		id
+		description
+		name
+		products {
+			id
+			name
+			description
+			price
+			rating
+			images {
+				url
+			}
+			categories {
+				name
+				description
+			}
+		}
+	}
+}

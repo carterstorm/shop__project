@@ -286,6 +286,13 @@ export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, n
 
 export type CategoryListItemFragment = { id: string, name: string, slug: string };
 
+export type CollectionGetItemBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CollectionGetItemBySlugQuery = { collection?: { id: string, description: string, name: string, products: Array<{ id: string, name: string, description: string, price: number, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
+
 export type CollectionListItemFragment = { id: string, name: string, slug: string };
 
 export type CollectionsGetListQueryVariables = Exact<{
@@ -392,6 +399,29 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
+export const CollectionGetItemBySlugDocument = new TypedDocumentString(`
+    query CollectionGetItemBySlug($slug: String) {
+  collection(slug: $slug) {
+    id
+    description
+    name
+    products {
+      id
+      name
+      description
+      price
+      rating
+      images {
+        url
+      }
+      categories {
+        name
+        description
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CollectionGetItemBySlugQuery, CollectionGetItemBySlugQueryVariables>;
 export const CollectionsGetListDocument = new TypedDocumentString(`
     query CollectionsGetList($take: Int) {
   collections(take: $take) {
