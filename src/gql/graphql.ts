@@ -277,14 +277,14 @@ export type CategoriesGetItemsBySlugQueryVariables = Exact<{
 }>;
 
 
-export type CategoriesGetItemsBySlugQuery = { category?: { slug: string, products: Array<{ id: string, name: string, price: number, description: string, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
+export type CategoriesGetItemsBySlugQuery = { category?: { id: string, name: string, description: string, slug: string, products: Array<{ id: string, name: string, price: number, description: string, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
 
 export type CategoriesGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, name: string, slug: string }> } };
+export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, description: string, name: string, slug: string }> } };
 
-export type CategoryListItemFragment = { id: string, name: string, slug: string };
+export type CategoryListItemFragment = { id: string, name: string, slug: string, description: string };
 
 export type CollectionGetItemBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -343,6 +343,7 @@ export const CategoryListItemFragmentDoc = new TypedDocumentString(`
   id
   name
   slug
+  description
 }
     `, {"fragmentName":"CategoryListItem"}) as unknown as TypedDocumentString<CategoryListItemFragment, unknown>;
 export const CollectionListItemFragmentDoc = new TypedDocumentString(`
@@ -371,6 +372,9 @@ export const ProductsListItemFragmentDoc = new TypedDocumentString(`
 export const CategoriesGetItemsBySlugDocument = new TypedDocumentString(`
     query CategoriesGetItemsBySlug($slug: String) {
   category(slug: $slug) {
+    id
+    name
+    description
     slug
     products {
       id
@@ -393,6 +397,7 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   categories {
     data {
       id
+      description
       name
       slug
     }

@@ -1,7 +1,7 @@
 import { CollectionGetItemBySlugDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
-export const getCollection = async (slug: string) => {
+export const getCollectionBySlug = async (slug: string) => {
 	const graphqlResponse = await executeGraphQL(CollectionGetItemBySlugDocument, { slug });
 
 	if (!graphqlResponse) {

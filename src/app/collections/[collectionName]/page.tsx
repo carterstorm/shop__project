@@ -1,9 +1,34 @@
 import { notFound } from "next/navigation";
-import { getCollection } from "@/api/collection";
+import { type Metadata } from "next";
+import { getCollectionBySlug } from "@/api/collection";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { PageHeader } from "@/ui/molecules/PageHeader";
+import { PageHeaderHeading } from "@/ui/atoms/PageHeaderHeading";
+import { PageHeaderParagraph } from "@/ui/atoms/PageHeaderParagraph";
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { collectionName: string };
+}): Promise<Metadata> => {
+	const collection = await getCollectionBySlug(params.collectionName);
+
+	if (!collection) {
+		return { title: "Collection Not Found" };
+	}
+
+	return {
+		title: collection.name,
+		description: collection.description,
+		openGraph: {
+			title: collection.name,
+			description: collection.description,
+		},
+	};
+};
 
 export default async function CollectionPage({ params }: { params: { collectionName: string } }) {
-	const collection = await getCollection(params.collectionName);
+	const collection = await getCollectionBySlug(params.collectionName);
 
 	if (!collection) {
 		return notFound();
@@ -11,10 +36,10 @@ export default async function CollectionPage({ params }: { params: { collectionN
 
 	return (
 		<section className="mx-auto lg:max-w-7xl lg:px-0">
-			<div className="flex flex-col items-center gap-4">
-				<h2 className="text-5xl font-bold">{collection.name}</h2>
-				<p className="text-lg">{collection.description}</p>
-			</div>
+			<PageHeader>
+				<PageHeaderHeading>{collection.name}</PageHeaderHeading>
+				<PageHeaderParagraph>{collection.description}</PageHeaderParagraph>
+			</PageHeader>
 			<ProductList products={collection.products} />
 		</section>
 	);

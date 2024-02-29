@@ -2,6 +2,7 @@ query CategoriesGetList {
 	categories {
 		data {
 			id
+			description
 			name
 			slug
 		}

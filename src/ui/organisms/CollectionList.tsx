@@ -8,7 +8,7 @@ type CollectionListProps = {
 
 export const CollectionList = ({ collections }: CollectionListProps) => {
 	return (
-		<ul className="mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+		<ul className="mx-auto grid grid-cols-1 gap-4 py-6 sm:grid-cols-2 md:grid-cols-3">
 			{collections.map((collection) => {
 				return (
 					<CardItem
