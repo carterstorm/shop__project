@@ -8,12 +8,7 @@ const config: Config = {
 		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
-		extend: {
-			colors: {
-				"font-dark": "#1a1a1a",
-				"font-light": "#f5f5f5",
-			},
-		},
+		extend: {},
 	},
 	plugins: [require("@tailwindcss/typography")],
 };

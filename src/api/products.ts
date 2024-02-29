@@ -1,16 +1,16 @@
-import { numberOfProductsByPage } from "@/constants";
+import { numberOfAllProductsByPage } from "@/constants";
 import { ProductsGetListDocument, ProductsGetListLengthDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
-export const getNumberOfAllPages = async () => {
+export const getNumberOfAllProductsPages = async () => {
 	const graphqlResponse = await executeGraphQL(ProductsGetListLengthDocument);
 
 	if (!graphqlResponse) {
-		throw new Error("Failed to fetch products");
+		throw new Error("Failed to fetch number of products");
 	}
 
 	const numberOfAllProducts = graphqlResponse.products.meta.total;
-	const numberOfAllPages = Math.ceil(numberOfAllProducts / numberOfProductsByPage);
+	const numberOfAllPages = Math.ceil(numberOfAllProducts / numberOfAllProductsByPage);
 	return numberOfAllPages;
 };
 

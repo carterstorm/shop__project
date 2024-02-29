@@ -19,9 +19,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${inter.className} bg-slate-100`}>
 				<Header />
-				<section className="mx-auto max-w-2xl px-8 py-6 md:max-w-4xl lg:max-w-7xl">
-					{children}
-				</section>
+				<section className="mx-auto px-8 py-6">{children}</section>
 			</body>
 		</html>
 	);

@@ -7,7 +7,7 @@ export const getProductById = async (id: string) => {
 	});
 
 	if (!graphqlResponse) {
-		throw new Error("Failed to fetch products");
+		throw new Error("Failed to fetch product");
 	}
 
 	return graphqlResponse.product;
