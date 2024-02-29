@@ -286,6 +286,15 @@ export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, n
 
 export type CategoryListItemFragment = { id: string, name: string, slug: string };
 
+export type CollectionListItemFragment = { id: string, name: string, slug: string };
+
+export type CollectionsGetListQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CollectionsGetListQuery = { collections: { data: Array<{ id: string, name: string, slug: string }> } };
+
 export type ProductGetItemByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -329,6 +338,13 @@ export const CategoryListItemFragmentDoc = new TypedDocumentString(`
   slug
 }
     `, {"fragmentName":"CategoryListItem"}) as unknown as TypedDocumentString<CategoryListItemFragment, unknown>;
+export const CollectionListItemFragmentDoc = new TypedDocumentString(`
+    fragment CollectionListItem on Collection {
+  id
+  name
+  slug
+}
+    `, {"fragmentName":"CollectionListItem"}) as unknown as TypedDocumentString<CollectionListItemFragment, unknown>;
 export const ProductsListItemFragmentDoc = new TypedDocumentString(`
     fragment ProductsListItem on Product {
   id
@@ -376,6 +392,17 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
+export const CollectionsGetListDocument = new TypedDocumentString(`
+    query CollectionsGetList($take: Int) {
+  collections(take: $take) {
+    data {
+      id
+      name
+      slug
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
 export const ProductGetItemByIdDocument = new TypedDocumentString(`
     query ProductGetItemById($id: ID!) {
   product(id: $id) {
