@@ -44,7 +44,8 @@ export const getSuggestedProductsListByFilteredCategory = async (
 
 	const filteredSuggestedProducts = graphqlResponse.products.data.filter(
 		(suggestedProduct: ProductsListItemFragment) =>
-			suggestedProduct.categories[0].name === product.categories[0].name,
+			suggestedProduct.categories[0].name === product.categories[0].name &&
+			suggestedProduct.id !== product.id,
 	);
 
 	return filteredSuggestedProducts;
