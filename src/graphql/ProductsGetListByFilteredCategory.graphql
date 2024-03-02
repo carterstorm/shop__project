@@ -1,0 +1,18 @@
+query ProductsGetListByFilteredCategory($take: Int!) {
+	products(take: $take) {
+		data {
+			id
+			name
+			price
+			description
+			rating
+			images {
+				url
+			}
+			categories {
+				name
+				description
+			}
+		}
+	}
+}

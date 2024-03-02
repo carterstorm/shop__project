@@ -319,6 +319,13 @@ export type ProductsGetListQueryVariables = Exact<{
 
 export type ProductsGetListQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } };
 
+export type ProductsGetListByFilteredCategoryQueryVariables = Exact<{
+  take: Scalars['Int']['input'];
+}>;
+
+
+export type ProductsGetListByFilteredCategoryQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }>, meta: { count: number, total: number } } };
+
 export type ProductsGetListLengthQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -476,6 +483,30 @@ export const ProductsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+export const ProductsGetListByFilteredCategoryDocument = new TypedDocumentString(`
+    query ProductsGetListByFilteredCategory($take: Int!) {
+  products(take: $take) {
+    data {
+      id
+      name
+      price
+      description
+      rating
+      images {
+        url
+      }
+      categories {
+        name
+        description
+      }
+    }
+    meta {
+      count
+      total
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetListByFilteredCategoryQuery, ProductsGetListByFilteredCategoryQueryVariables>;
 export const ProductsGetListLengthDocument = new TypedDocumentString(`
     query ProductsGetListLength {
   products {

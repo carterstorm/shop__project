@@ -4,7 +4,10 @@ import { type Metadata } from "next";
 import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
 import { getProductById } from "@/api/product";
 import { ProductInformation } from "@/ui/molecules/ProductInformation";
-import { getProductsList } from "@/api/products";
+import {
+	getNumberOfAllProductsAndAllPages,
+	getSuggestedProductsListByFilteredCategory,
+} from "@/api/products";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 
 type SingleProductPageProps = {
@@ -42,11 +45,16 @@ export const generateMetadata = async ({
 
 export default async function SingleProductPage({ params }: SingleProductPageProps) {
 	const product = await getProductById(params.productId);
-	const suggestedProducts = await getProductsList(10, 0);
+	const { numberOfAllProducts } = await getNumberOfAllProductsAndAllPages();
 
 	if (!product) {
 		return notFound();
 	}
+
+	const filteredSuggestedProducts = await getSuggestedProductsListByFilteredCategory(
+		numberOfAllProducts,
+		product,
+	);
 
 	return (
 		<section className="mx-auto lg:max-w-7xl lg:px-0">
@@ -55,7 +63,7 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 				<ProductInformation product={product} />
 			</div>
 			<Suspense>
-				<SuggestedProducts suggestedProducts={suggestedProducts} />
+				<SuggestedProducts suggestedProducts={filteredSuggestedProducts} />
 			</Suspense>
 		</section>
 	);

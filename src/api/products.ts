@@ -1,5 +1,10 @@
 import { numberOfAllProductsByPage } from "@/constants";
-import { ProductsGetListDocument, ProductsGetListLengthDocument } from "@/gql/graphql";
+import {
+	ProductsGetListByFilteredCategoryDocument,
+	ProductsGetListDocument,
+	ProductsGetListLengthDocument,
+	type ProductsListItemFragment,
+} from "@/gql/graphql";
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
 export const getNumberOfAllProductsAndAllPages = async () => {
@@ -25,4 +30,22 @@ export const getProductsList = async (take: number = 4, skip: number = 0) => {
 	}
 
 	return graphqlResponse.products.data;
+};
+
+export const getSuggestedProductsListByFilteredCategory = async (
+	take: number,
+	product: ProductsListItemFragment,
+) => {
+	const graphqlResponse = await executeGraphQL(ProductsGetListByFilteredCategoryDocument, { take });
+
+	if (!graphqlResponse) {
+		throw new Error("Failed to fetch suggested products by category");
+	}
+
+	const filteredSuggestedProducts = graphqlResponse.products.data.filter(
+		(suggestedProduct: ProductsListItemFragment) =>
+			suggestedProduct.categories[0].name === product.categories[0].name,
+	);
+
+	return filteredSuggestedProducts;
 };
