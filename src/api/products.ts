@@ -6,7 +6,7 @@ export const getNumberOfAllProductsAndAllPages = async () => {
 	const graphqlResponse = await executeGraphQL(ProductsGetListLengthDocument);
 
 	if (!graphqlResponse) {
-		throw new Error("Failed to fetch number of products");
+		throw new Error("Failed to fetch number of all pages and all products");
 	}
 
 	const numberOfAllProducts = graphqlResponse.products.meta.total;
