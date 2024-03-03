@@ -10,6 +10,7 @@ type ActiveLinkProps<T extends string> = {
 	children: React.ReactNode;
 	className?: string;
 	activeClassName?: string;
+	activePageNumber?: number;
 	exact?: boolean;
 	disabled?: boolean;
 };
@@ -20,12 +21,14 @@ export const ActiveLink = <T extends string>({
 	children,
 	className,
 	activeClassName,
+	activePageNumber,
 }: ActiveLinkProps<T>) => {
 	const pathName = usePathname();
 	const isActive = exact ? pathName === href : pathName.startsWith(href);
 
 	return (
 		<Link
+			prefetch={activePageNumber ?? 1 < 5 ? true : false}
 			aria-current={isActive ? true : undefined}
 			href={href}
 			className={clsx(className, isActive && activeClassName)}
