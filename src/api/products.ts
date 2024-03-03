@@ -16,6 +16,7 @@ export const getNumberOfAllProductsAndAllPages = async () => {
 
 	const numberOfAllProducts = graphqlResponse.products.meta.total;
 	const numberOfAllPages = Math.ceil(numberOfAllProducts / numberOfAllProductsByPage);
+
 	return { numberOfAllProducts, numberOfAllPages };
 };
 

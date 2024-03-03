@@ -7,6 +7,7 @@ import { Pagination } from "@/ui/molecules/Pagination";
 import { PageHeaderHeading } from "@/ui/atoms/PageHeaderHeading";
 import { PageHeader } from "@/ui/molecules/PageHeader";
 import { PageHeaderParagraph } from "@/ui/atoms/PageHeaderParagraph";
+import { setActivePage } from "@/utils/setActivePage";
 
 export const generateMetadata = async ({
 	params,
@@ -40,8 +41,10 @@ export default async function CategoryPage({
 		return notFound();
 	}
 
-	const activePageNumber = parseInt(params.pageNumber) > 0 ? parseInt(params.pageNumber) : 1;
-	const pagesByCategory = Math.ceil(category.products.length / numberOfProductsByCategoryPage);
+	const numberOfPagesByCategory = Math.ceil(
+		category.products.length / numberOfProductsByCategoryPage,
+	);
+	const activePageNumber = setActivePage(params.pageNumber, numberOfPagesByCategory);
 
 	const slicedProducts = category.products.slice(
 		(activePageNumber - 1) * numberOfProductsByCategoryPage,
@@ -58,7 +61,7 @@ export default async function CategoryPage({
 			<Pagination
 				path={`categories/${params.categoryName}` as Route}
 				activePageNumber={activePageNumber}
-				numberOfAllPages={pagesByCategory}
+				numberOfAllPages={numberOfPagesByCategory}
 			/>
 		</section>
 	);

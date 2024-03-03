@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { getNumberOfAllProductsAndAllPages, getProductsList } from "@/api/products";
@@ -6,6 +5,7 @@ import { numberOfAllProductsByPage } from "@/constants";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { PageHeaderHeading } from "@/ui/atoms/PageHeaderHeading";
 import { PageHeader } from "@/ui/molecules/PageHeader";
+import { setActivePage } from "@/utils/setActivePage";
 
 export const metadata: Metadata = {
 	title: "All products",
@@ -16,22 +16,11 @@ export const metadata: Metadata = {
 	},
 };
 
-export const generateStaticParams = async () => {
-	const { numberOfAllPages } = await getNumberOfAllProductsAndAllPages();
-
-	return Array.from({ length: numberOfAllPages }, (_, i) => ({ page: (i + 1).toString() }));
-};
-
 export default async function ProductsPage({ params }: { params: { page: string } }) {
-	const activePageNumber = parseInt(params.page) > 0 ? parseInt(params.page) : 1;
-	const offset = activePageNumber * numberOfAllProductsByPage - numberOfAllProductsByPage;
-
-	const productsByPageNumber = await getProductsList(numberOfAllProductsByPage, offset);
 	const { numberOfAllPages } = await getNumberOfAllProductsAndAllPages();
-
-	if (!productsByPageNumber && !numberOfAllPages) {
-		return notFound();
-	}
+	const activePageNumber = setActivePage(params.page, numberOfAllPages);
+	const offset = activePageNumber * numberOfAllProductsByPage - numberOfAllProductsByPage;
+	const productsByPageNumber = await getProductsList(numberOfAllProductsByPage, offset);
 
 	return (
 		<>
