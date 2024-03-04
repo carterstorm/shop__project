@@ -2,9 +2,13 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { SinglePageProductImage } from "@/ui/atoms/SinglePageProductImage";
-import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { getProductById } from "@/api/product";
 import { ProductInformation } from "@/ui/molecules/ProductInformation";
+import {
+	getNumberOfAllProductsAndAllPages,
+	getSuggestedProductsListByFilteredCategory,
+} from "@/api/products";
+import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 
 type SingleProductPageProps = {
 	params: {
@@ -41,10 +45,16 @@ export const generateMetadata = async ({
 
 export default async function SingleProductPage({ params }: SingleProductPageProps) {
 	const product = await getProductById(params.productId);
+	const { numberOfAllProducts } = await getNumberOfAllProductsAndAllPages();
 
 	if (!product) {
 		return notFound();
 	}
+
+	const filteredSuggestedProducts = await getSuggestedProductsListByFilteredCategory(
+		numberOfAllProducts,
+		product,
+	);
 
 	return (
 		<section className="mx-auto lg:max-w-7xl lg:px-0">
@@ -53,7 +63,7 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 				<ProductInformation product={product} />
 			</div>
 			<Suspense>
-				<SuggestedProducts />
+				<SuggestedProducts suggestedProducts={filteredSuggestedProducts} />
 			</Suspense>
 		</section>
 	);

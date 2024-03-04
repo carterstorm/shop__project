@@ -29,18 +29,22 @@ export const Pagination = ({
 		<nav className="flex justify-center">
 			<ul className="flex items-center gap-6" aria-label="pagination">
 				{activePageNumber >= 4 && (
-					<ActiveLink href={`/${path}/${firstPage}` as Route}>
+					<ActiveLink href={`/${path}/${firstPage}` as Route} activePageNumber={activePageNumber}>
 						<ChevronsLeft strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
 				{activePageNumber !== firstPage && (
-					<ActiveLink href={`/${path}/${activePageNumber - 1}` as Route}>
+					<ActiveLink
+						href={`/${path}/${activePageNumber - 1}` as Route}
+						activePageNumber={activePageNumber}
+					>
 						<ChevronLeft strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
 				{[...previousPages, activePageNumber, ...nextPages].map((page, index) => {
 					return (
 						<ActiveLink
+							activePageNumber={activePageNumber}
 							key={index}
 							href={`/${path}/${page}` as Route}
 							className="font-medium"
@@ -51,12 +55,18 @@ export const Pagination = ({
 					);
 				})}
 				{activePageNumber !== numberOfAllPages && (
-					<ActiveLink href={`/${path}/${activePageNumber + 1}` as Route}>
+					<ActiveLink
+						href={`/${path}/${activePageNumber + 1}` as Route}
+						activePageNumber={activePageNumber}
+					>
 						<ChevronRight strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
 				{activePageNumber <= numberOfAllPages - 3 && (
-					<ActiveLink href={`/${path}/${numberOfAllPages}` as Route}>
+					<ActiveLink
+						href={`/${path}/${numberOfAllPages}` as Route}
+						activePageNumber={activePageNumber}
+					>
 						<ChevronsRight strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}

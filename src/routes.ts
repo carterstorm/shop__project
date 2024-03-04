@@ -34,7 +34,7 @@ export const appRoutes: AppRoutes[] = [
 	{
 		id: "6",
 		path: "/categories/t-shirts",
-		label: "T-shirts",
+		label: "T-Shirts",
 		exact: false,
 	},
 ];

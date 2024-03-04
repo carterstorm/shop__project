@@ -6,8 +6,12 @@ import { Header } from "@/ui/organisms/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Shop Project",
-	description: "This shop project is created by using Next app",
+	title: "Shop Project - Next.js 14 Masters Course",
+	description: "This page was created during the Nextjs 14 Masters course",
+	openGraph: {
+		title: "Shop Project - Next.js 14 Masters Course",
+		description: "This page was created during the Nextjs 14 Masters course",
+	},
 };
 
 export default function RootLayout({

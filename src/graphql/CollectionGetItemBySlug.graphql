@@ -1,14 +1,14 @@
-query CategoriesGetItemsBySlug($slug: String) {
-	category(slug: $slug) {
+query CollectionGetItemBySlug($slug: String) {
+	collection(slug: $slug) {
 		id
-		name
 		description
-		slug
+		name
 		products {
 			id
 			name
-			price
 			description
+			price
+			rating
 			images {
 				url
 			}
