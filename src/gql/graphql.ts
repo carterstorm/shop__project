@@ -179,7 +179,8 @@ export type ProductList = {
 export type ProductSortBy =
   | 'DEFAULT'
   | 'NAME'
-  | 'PRICE';
+  | 'PRICE'
+  | 'RATING';
 
 export type Query = {
   cart?: Maybe<Cart>;
@@ -324,7 +325,7 @@ export type ProductsGetListByFilteredCategoryQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListByFilteredCategoryQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }>, meta: { count: number, total: number } } };
+export type ProductsGetListByFilteredCategoryQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } };
 
 export type ProductsGetListLengthQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -499,10 +500,6 @@ export const ProductsGetListByFilteredCategoryDocument = new TypedDocumentString
         name
         description
       }
-    }
-    meta {
-      count
-      total
     }
   }
 }
