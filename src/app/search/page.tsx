@@ -5,9 +5,7 @@ import { getProductsListBySearchParams } from "@/api/products";
 export default async function SearchPage({ searchParams }: { searchParams: { query: string } }) {
 	const products = await getProductsListBySearchParams(searchParams.query);
 
-	if (!products) {
-		<p>NotFound</p>;
-	}
+	if (!products || products.length === 0) return <p>No products found.</p>;
 
 	return (
 		<section>

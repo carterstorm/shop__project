@@ -54,9 +54,9 @@ export const getSuggestedProductsListByFilteredCategory = async (
 };
 
 export const getProductsListBySearchParams = async (search: string) => {
-	if (!search || search.length < 2) {
-		return [];
-	}
+	// if (!search || search.length < 2) {
+	// 	return [];
+	// }
 
 	const graphqlResponse = await executeGraphQL(ProductsGetListBySearchDocument, { search });
 
