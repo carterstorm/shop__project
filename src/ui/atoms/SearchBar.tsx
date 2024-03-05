@@ -42,7 +42,7 @@ export const SearchBar = () => {
 
 	return (
 		<form className="flex items-center justify-center" onSubmit={handleSubmit}>
-			<Link href={`/search?query=${search}}` as Route}>
+			<Link href={`${search.length <= 1 ? "/products" : `/search?query=${search}`}` as Route}>
 				<SearchIcon size={20} />
 			</Link>
 			<input
