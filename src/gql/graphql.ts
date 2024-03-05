@@ -327,6 +327,13 @@ export type ProductsGetListByFilteredCategoryQueryVariables = Exact<{
 
 export type ProductsGetListByFilteredCategoryQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } };
 
+export type ProductsGetListBySearchQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ProductsGetListBySearchQuery = { products: { data: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } };
+
 export type ProductsGetListLengthQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -504,6 +511,26 @@ export const ProductsGetListByFilteredCategoryDocument = new TypedDocumentString
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetListByFilteredCategoryQuery, ProductsGetListByFilteredCategoryQueryVariables>;
+export const ProductsGetListBySearchDocument = new TypedDocumentString(`
+    query ProductsGetListBySearch($search: String) {
+  products(search: $search) {
+    data {
+      id
+      name
+      price
+      description
+      rating
+      images {
+        url
+      }
+      categories {
+        name
+        description
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetListBySearchQuery, ProductsGetListBySearchQueryVariables>;
 export const ProductsGetListLengthDocument = new TypedDocumentString(`
     query ProductsGetListLength {
   products {

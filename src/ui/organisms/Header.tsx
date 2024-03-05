@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { Logo } from "@/ui/atoms/Logo";
 import { Navigation } from "@/ui/molecules/Navigation";
+import { SearchBar } from "@/ui/atoms/SearchBar";
 
 export const Header = () => {
 	return (
@@ -13,7 +14,10 @@ export const Header = () => {
 					</Link>
 					<Navigation />
 				</div>
-				<ShoppingCart />
+				<div className="flex gap-6">
+					<SearchBar />
+					<ShoppingCart />
+				</div>
 			</div>
 		</header>
 	);
