@@ -1,6 +1,7 @@
 import { numberOfAllProductsByPage } from "@/constants";
 import {
 	ProductsGetListByFilteredCategoryDocument,
+	ProductsGetListBySearchDocument,
 	ProductsGetListDocument,
 	ProductsGetListLengthDocument,
 	type ProductsListItemFragment,
@@ -50,4 +51,22 @@ export const getSuggestedProductsListByFilteredCategory = async (
 	);
 
 	return filteredSuggestedProducts;
+};
+
+export const getProductsListBySearchParams = async (search: string) => {
+	if (!search || search.length < 2) {
+		return [];
+	}
+
+	const graphqlResponse = await executeGraphQL(ProductsGetListBySearchDocument, { search });
+
+	if (!graphqlResponse) {
+		throw new Error("Failed to fetch");
+	}
+
+	const searchedProducts = graphqlResponse.products.data.filter((product) =>
+		product.name.toLowerCase().includes(search.toLowerCase()),
+	);
+
+	return searchedProducts;
 };
