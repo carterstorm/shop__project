@@ -11,6 +11,7 @@ export const SearchBar = () => {
 	const router = useRouter();
 	const [search, setSearch] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
+	const debouncedSearch = useDebounce(search);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const trimmedValue = event.target.value.trim();
@@ -35,8 +36,6 @@ export const SearchBar = () => {
 		}
 	};
 
-	const debouncedSearch = useDebounce(search, 1500);
-
 	useEffect(() => {
 		if (debouncedSearch.trim()) {
 			router.push(`/search?query=${debouncedSearch}` as Route);
@@ -44,12 +43,15 @@ export const SearchBar = () => {
 	}, [debouncedSearch, router]);
 
 	return (
-		<form className="flex items-center justify-center" onSubmit={handleSubmit}>
-			<Link href={`${search.length <= 1 ? "/products" : `/search?query=${search}`}` as Route}>
+		<form className="ltr relative flex items-center" onSubmit={handleSubmit}>
+			<Link
+				className="absolute left-2 top-1/2 -translate-y-1/2 transform"
+				href={`${search.length <= 1 ? "/products" : `/search?query=${search}`}` as Route}
+			>
 				<SearchIcon size={20} />
 			</Link>
 			<input
-				className=""
+				className="focus:ring-primary-500 h-10 min-w-60 rounded-xl border ps-8 text-sm transition-all duration-300 ease-in-out focus:border-transparent focus:outline-none focus:ring-2"
 				type="search"
 				placeholder="Type for search..."
 				ref={inputRef}
