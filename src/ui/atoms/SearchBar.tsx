@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { SearchIcon } from "lucide-react";
 import { type Route } from "next";
+import { useDebounce } from "@/utils/useDebounce";
 
 export const SearchBar = () => {
 	const router = useRouter();
@@ -34,11 +35,13 @@ export const SearchBar = () => {
 		}
 	};
 
+	const debouncedSearch = useDebounce(search, 1500);
+
 	useEffect(() => {
-		if (search.trim()) {
-			router.push(`/search?query=${search}` as Route);
+		if (debouncedSearch.trim()) {
+			router.push(`/search?query=${debouncedSearch}` as Route);
 		}
-	}, [search, router]);
+	}, [debouncedSearch, router]);
 
 	return (
 		<form className="flex items-center justify-center" onSubmit={handleSubmit}>
