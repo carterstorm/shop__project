@@ -12,8 +12,10 @@ export const SearchBar = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (event.target.value.trim().length > 1) {
-			setSearch(event.target.value.trim());
+		const trimmedValue = event.target.value.trim();
+
+		if (trimmedValue.length > 1) {
+			setSearch(trimmedValue);
 		} else {
 			setSearch("");
 			router.push("/products");
