@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 import {
 	CartAddItemDocument,
 	CartCreateDocument,
@@ -8,15 +9,20 @@ import {
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
 export const cartAddItem = async (cartId: string, productId: string, quantity: number) => {
-	const graphqlResponse = await executeGraphQL(CartAddItemDocument, {
-		cartId,
-		productId,
-		quantity,
+	const graphqlResponse = await executeGraphQL({
+		query: CartAddItemDocument,
+		variables: {
+			cartId,
+			productId,
+			quantity,
+		},
 	});
 
 	if (!graphqlResponse) {
 		throw new Error("Failed to add item to cart");
 	}
+
+	revalidateTag("cart");
 
 	return graphqlResponse.cartAddItem;
 };
@@ -25,7 +31,15 @@ export const getCartByIdFromCookie = async () => {
 	const cartId = cookies().get("cartId")?.value;
 
 	if (cartId) {
-		const cart = await executeGraphQL(CartGetByIdDocument, { id: cartId });
+		const cart = await executeGraphQL({
+			query: CartGetByIdDocument,
+			variables: {
+				id: cartId,
+			},
+			next: {
+				tags: ["cart"],
+			},
+		});
 
 		if (cart) {
 			return cart.cart;
@@ -36,7 +50,9 @@ export const getCartByIdFromCookie = async () => {
 };
 
 export const createOrFindCart = async () => {
-	const graphqlResponse = await executeGraphQL(CartCreateDocument, {});
+	const graphqlResponse = await executeGraphQL({
+		query: CartCreateDocument,
+	});
 
 	if (!graphqlResponse) {
 		throw new Error("Failed to create cart");

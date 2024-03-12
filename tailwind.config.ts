@@ -10,7 +10,7 @@ const config: Config = {
 	theme: {
 		extend: {
 			animation: {
-				brakeAndReverse: "brakeAndReverse 0.5s ease-in-out",
+				brakeAndReverse: "brakeAndReverse 0.3s ease-in-out",
 			},
 			keyframes: {
 				brakeAndReverse: {

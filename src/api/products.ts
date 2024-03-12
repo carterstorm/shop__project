@@ -9,7 +9,7 @@ import {
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
 export const getNumberOfAllProductsAndAllPages = async () => {
-	const graphqlResponse = await executeGraphQL(ProductsGetListLengthDocument);
+	const graphqlResponse = await executeGraphQL({ query: ProductsGetListLengthDocument });
 
 	if (!graphqlResponse) {
 		throw new Error("Failed to fetch number of all pages and all products");
@@ -22,9 +22,9 @@ export const getNumberOfAllProductsAndAllPages = async () => {
 };
 
 export const getProductsList = async (take: number = 4, skip: number = 0) => {
-	const graphqlResponse = await executeGraphQL(ProductsGetListDocument, {
-		take,
-		skip,
+	const graphqlResponse = await executeGraphQL({
+		query: ProductsGetListDocument,
+		variables: { take, skip },
 	});
 
 	if (!graphqlResponse) {
@@ -38,7 +38,10 @@ export const getSuggestedProductsListByFilteredCategory = async (
 	take: number,
 	product: ProductsListItemFragment,
 ) => {
-	const graphqlResponse = await executeGraphQL(ProductsGetListByFilteredCategoryDocument, { take });
+	const graphqlResponse = await executeGraphQL({
+		query: ProductsGetListByFilteredCategoryDocument,
+		variables: { take },
+	});
 
 	if (!graphqlResponse) {
 		throw new Error("Failed to fetch suggested products by category");
@@ -58,7 +61,10 @@ export const getProductsListBySearchParams = async (search: string) => {
 		return [];
 	}
 
-	const graphqlResponse = await executeGraphQL(ProductsGetListBySearchDocument, { search });
+	const graphqlResponse = await executeGraphQL({
+		query: ProductsGetListBySearchDocument,
+		variables: { search },
+	});
 
 	if (!graphqlResponse) {
 		throw new Error("Failed to fetch");
