@@ -281,7 +281,7 @@ export type CartAddItemMutationVariables = Exact<{
 }>;
 
 
-export type CartAddItemMutation = { cartAddItem: { id: string } };
+export type CartAddItemMutation = { cartAddItem: { id: string, items: Array<{ product: { id: string, name: string } }> } };
 
 export type CartChangeItemQuantityMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -443,6 +443,12 @@ export const CartAddItemDocument = new TypedDocumentString(`
     input: {item: {productId: $productId, quantity: $quantity}}
   ) {
     id
+    items {
+      product {
+        id
+        name
+      }
+    }
   }
 }
     `) as unknown as TypedDocumentString<CartAddItemMutation, CartAddItemMutationVariables>;

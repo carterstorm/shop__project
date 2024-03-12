@@ -9,12 +9,15 @@ type ProductInformationProps = {
 };
 
 export const ProductInformation = ({ product }: ProductInformationProps) => {
-	async function addProductToCartAction() {
+	const addProductToCartAction = async () => {
 		"use server";
 
 		const cart = await getOrCreateCart();
-		await cartAddItem(cart.id, product.id, 1);
-	}
+
+		if (!cart.items.some((item) => item.product.id === product.id)) {
+			await cartAddItem(cart.id, product.id, 1);
+		}
+	};
 
 	return (
 		<form action={addProductToCartAction} className="flex flex-col items-start gap-6 text-gray-600">
