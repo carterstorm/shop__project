@@ -8,7 +8,18 @@ const config: Config = {
 		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			animation: {
+				brakeAndReverse: "brakeAndReverse 0.5s ease-in-out",
+			},
+			keyframes: {
+				brakeAndReverse: {
+					"0%": { transform: "translateY(-56px)" },
+					"50%": { transform: "translateY(4px)" },
+					"100%": { transform: "translateY(0)" },
+				},
+			},
+		},
 	},
 	plugins: [require("@tailwindcss/typography")],
 };

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
 import { Logo } from "@/ui/atoms/Logo";
 import { Navigation } from "@/ui/molecules/Navigation";
 import { SearchBar } from "@/ui/atoms/SearchBar";
+import { Cart } from "@/ui/atoms/Cart";
 
 export const Header = () => {
 	return (
@@ -16,9 +16,7 @@ export const Header = () => {
 				</div>
 				<div className="flex items-center gap-6">
 					<SearchBar />
-					<Link href="/cart">
-						<ShoppingCart />
-					</Link>
+					<Cart />
 				</div>
 			</div>
 		</header>
