@@ -10,7 +10,7 @@ export const SingleProductInfo = ({ product }: { product: ProductsListItemFragme
 				<span>{product.rating?.toFixed(2)}/5</span>
 			</div>
 			<p className="italic">{product.categories[0].description}</p>
-			<span className="text-3xl font-bold text-gray-700">{formatMoney(product.price, "USD")}</span>
+			<span className="text-3xl font-bold text-gray-700">{formatMoney(product.price)}</span>
 		</div>
 	);
 };

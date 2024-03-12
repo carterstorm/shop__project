@@ -5,10 +5,9 @@ fragment CartItem on Cart {
 			id
 			name
 			price
-			description
-			rating
 			images {
 				url
+				alt
 			}
 		}
 		quantity

@@ -21,14 +21,18 @@ export const cartAddItem = async (cartId: string, productId: string, quantity: n
 	return graphqlResponse.cartAddItem;
 };
 
-export const getCartById = async (cartId: string) => {
-	const graphqlResponse = await executeGraphQL(CartGetByIdDocument, { id: cartId });
+export const getCartByIdFromCookie = async () => {
+	const cartId = cookies().get("cartId")?.value;
 
-	if (!graphqlResponse) {
-		throw new Error("Failed to find cart");
+	if (cartId) {
+		const cart = await executeGraphQL(CartGetByIdDocument, { id: cartId });
+
+		if (cart) {
+			return cart.cart;
+		} else {
+			throw new Error("Failed to get cart from server");
+		}
 	}
-
-	return graphqlResponse.cart;
 };
 
 export const createOrFindCart = async () => {
@@ -42,23 +46,23 @@ export const createOrFindCart = async () => {
 };
 
 export const getOrCreateCart = async (): Promise<CartItemFragment> => {
-	const cartId = cookies().get("cartId")?.value;
+	const existingCart = await getCartByIdFromCookie();
 
-	if (cartId) {
-		const cart = await getCartById(cartId);
+	if (existingCart) {
+		return existingCart;
+	}
 
-		if (cart) {
-			return cart;
-		} else {
-			throw new Error("Filed to find cart at server side");
-		}
+	const cart = await createOrFindCart();
+
+	if (cart) {
+		cookies().set("cartId", cart.id, {
+			sameSite: "lax",
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
+		});
+		return cart;
 	} else {
-		const cart = await createOrFindCart();
-
-		if (cart) {
-			return cart;
-		} else {
-			throw new Error("Filed to create cart");
-		}
+		throw new Error("Filed to create cart");
 	}
 };

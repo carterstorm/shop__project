@@ -16,7 +16,9 @@ export const Header = () => {
 				</div>
 				<div className="flex items-center gap-6">
 					<SearchBar />
-					<ShoppingCart />
+					<Link href="/cart">
+						<ShoppingCart />
+					</Link>
 				</div>
 			</div>
 		</header>

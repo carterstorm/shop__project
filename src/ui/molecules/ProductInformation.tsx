@@ -1,5 +1,3 @@
-// import { getOrCreate } from "@/api/cart";
-import { cookies } from "next/headers";
 import { cartAddItem, getOrCreateCart } from "@/api/cart";
 import { type ProductsListItemFragment } from "@/gql/graphql";
 import { AddProductToCartButton } from "@/ui/atoms/AddProductToCartButton";
@@ -15,12 +13,6 @@ export const ProductInformation = ({ product }: ProductInformationProps) => {
 		"use server";
 
 		const cart = await getOrCreateCart();
-		cookies().set("cartId", cart.id, {
-			sameSite: "lax",
-			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
-		});
 		await cartAddItem(cart.id, product.id, 1);
 	}
 

@@ -283,21 +283,30 @@ export type CartAddItemMutationVariables = Exact<{
 
 export type CartAddItemMutation = { cartAddItem: { id: string } };
 
+export type CartChangeItemQuantityMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+  quantity: Scalars['Int']['input'];
+}>;
+
+
+export type CartChangeItemQuantityMutation = { cartChangeItemQuantity: { id: string } };
+
 export type CartCreateMutationVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
 }>;
 
 
-export type CartCreateMutation = { cartFindOrCreate: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }> } }> } };
+export type CartCreateMutation = { cartFindOrCreate: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ url: string, alt: string }> } }> } };
 
 export type CartGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }> } }> } | null };
+export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ url: string, alt: string }> } }> } | null };
 
-export type CartItemFragment = { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }> } }> };
+export type CartItemFragment = { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ url: string, alt: string }> } }> };
 
 export type CategoriesGetItemsBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -387,10 +396,9 @@ export const CartItemFragmentDoc = new TypedDocumentString(`
       id
       name
       price
-      description
-      rating
       images {
         url
+        alt
       }
     }
     quantity
@@ -438,6 +446,13 @@ export const CartAddItemDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CartAddItemMutation, CartAddItemMutationVariables>;
+export const CartChangeItemQuantityDocument = new TypedDocumentString(`
+    mutation CartChangeItemQuantity($id: ID!, $productId: ID!, $quantity: Int!) {
+  cartChangeItemQuantity(id: $id, productId: $productId, quantity: $quantity) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartChangeItemQuantityMutation, CartChangeItemQuantityMutationVariables>;
 export const CartCreateDocument = new TypedDocumentString(`
     mutation CartCreate($id: ID) {
   cartFindOrCreate(id: $id, input: {}) {
@@ -451,10 +466,9 @@ export const CartCreateDocument = new TypedDocumentString(`
       id
       name
       price
-      description
-      rating
       images {
         url
+        alt
       }
     }
     quantity
@@ -473,10 +487,9 @@ export const CartGetByIdDocument = new TypedDocumentString(`
       id
       name
       price
-      description
-      rating
       images {
         url
+        alt
       }
     }
     quantity
