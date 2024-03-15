@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { cartAddItem, getOrCreateCart } from "@/api/cart";
 import { type ProductsListItemFragment } from "@/gql/graphql";
 import { AddProductToCartButton } from "@/ui/atoms/AddProductToCartButton";
@@ -17,6 +18,8 @@ export const ProductInformation = ({ product }: ProductInformationProps) => {
 		if (!cart.items.some((item) => item.product.id === product.id)) {
 			await cartAddItem(cart.id, product.id, 1);
 		}
+
+		revalidateTag("cart");
 	};
 
 	return (

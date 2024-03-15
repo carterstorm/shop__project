@@ -6,13 +6,35 @@ import { redirect } from "next/navigation";
 import { formatMoney } from "@/utils/formatMoney";
 import { ProductQuantity } from "@/ui/molecules/ProductQuantity";
 import { getCartByIdFromCookie } from "@/api/cart";
+import { RemoveProductFromCartButton } from "@/ui/atoms/RemoveProductFromCartButton";
 
-const tHead = ["", "Product name", "Quantity", "Price"];
+const tHead = [
+	{
+		id: 1,
+		name: "",
+	},
+	{
+		id: 2,
+		name: "Product name",
+	},
+	{
+		id: 3,
+		name: "Quantity",
+	},
+	{
+		id: 4,
+		name: "Price",
+	},
+	{
+		id: 5,
+		name: "",
+	},
+];
 
 export const CartProductsTable = async () => {
 	const cart = await getCartByIdFromCookie();
 
-	if (!cart) {
+	if (!cart || cart.items.length === 0) {
 		redirect("/");
 	}
 
@@ -21,8 +43,8 @@ export const CartProductsTable = async () => {
 			<thead>
 				<tr className="mx-auto">
 					{tHead.map((th) => (
-						<th key={th} className="text-blue-500">
-							{th}
+						<th key={th.id} className="text-blue-500">
+							{th.name}
 						</th>
 					))}
 				</tr>
@@ -52,6 +74,9 @@ export const CartProductsTable = async () => {
 									/>
 								</td>
 								<td>{formatMoney(item.product.price)}</td>
+								<td>
+									<RemoveProductFromCartButton cartId={cart.id} productId={item.product.id} />
+								</td>
 							</tr>
 						),
 				)}

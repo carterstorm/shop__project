@@ -1,12 +1,11 @@
 import { cookies } from "next/headers";
-import { revalidateTag } from "next/cache";
+import { executeGraphQL } from "@/utils/executeGraphQL";
 import {
 	CartAddItemDocument,
 	CartCreateDocument,
 	CartGetByIdDocument,
 	type CartItemFragment,
 } from "@/gql/graphql";
-import { executeGraphQL } from "@/utils/executeGraphQL";
 
 export const cartAddItem = async (cartId: string, productId: string, quantity: number) => {
 	const graphqlResponse = await executeGraphQL({
@@ -16,13 +15,14 @@ export const cartAddItem = async (cartId: string, productId: string, quantity: n
 			productId,
 			quantity,
 		},
+		next: {
+			tags: ["cart"],
+		},
 	});
 
 	if (!graphqlResponse) {
 		throw new Error("Failed to add item to cart");
 	}
-
-	revalidateTag("cart");
 
 	return graphqlResponse.cartAddItem;
 };

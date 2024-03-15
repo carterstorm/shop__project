@@ -308,6 +308,14 @@ export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: n
 
 export type CartItemFragment = { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ url: string, alt: string }> } }> };
 
+export type CartRemoveItemMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type CartRemoveItemMutation = { cartRemoveItem: { id: string } };
+
 export type CategoriesGetItemsBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -501,6 +509,13 @@ export const CartGetByIdDocument = new TypedDocumentString(`
     quantity
   }
 }`) as unknown as TypedDocumentString<CartGetByIdQuery, CartGetByIdQueryVariables>;
+export const CartRemoveItemDocument = new TypedDocumentString(`
+    mutation CartRemoveItem($id: ID!, $productId: ID!) {
+  cartRemoveItem(id: $id, productId: $productId) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartRemoveItemMutation, CartRemoveItemMutationVariables>;
 export const CategoriesGetItemsBySlugDocument = new TypedDocumentString(`
     query CategoriesGetItemsBySlug($slug: String) {
   category(slug: $slug) {
