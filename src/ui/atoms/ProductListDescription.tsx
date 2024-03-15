@@ -12,7 +12,7 @@ export const ProductListDescription = ({ product }: ProductDescriptionProps) => 
 				<h3 className="text-sm  font-semibold text-blue-400">{product.name}</h3>
 				<p className="text-sm text-gray-500">{product.categories[0].name}</p>
 			</div>
-			<p className="text-sm font-medium text-gray-900">{formatMoney(product.price, "USD")}</p>
+			<p className="text-sm font-medium text-gray-900">{formatMoney(product.price)}</p>
 		</div>
 	);
 };

@@ -2,8 +2,12 @@ import { ProductGetItemByIdDocument, type ProductsListItemFragment } from "@/gql
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
 export const getProductById = async (id: ProductsListItemFragment["id"]) => {
-	const graphqlResponse = await executeGraphQL(ProductGetItemByIdDocument, {
-		id,
+	const graphqlResponse = await executeGraphQL({
+		query: ProductGetItemByIdDocument,
+		variables: { id },
+		next: {
+			revalidate: 15,
+		},
 	});
 
 	if (!graphqlResponse) {
