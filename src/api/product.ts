@@ -5,6 +5,9 @@ export const getProductById = async (id: ProductsListItemFragment["id"]) => {
 	const graphqlResponse = await executeGraphQL({
 		query: ProductGetItemByIdDocument,
 		variables: { id },
+		next: {
+			revalidate: 15,
+		},
 	});
 
 	if (!graphqlResponse) {

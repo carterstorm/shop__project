@@ -18,6 +18,7 @@ export const cartAddItem = async (cartId: string, productId: string, quantity: n
 		next: {
 			tags: ["cart"],
 		},
+		cache: "no-cache",
 	});
 
 	if (!graphqlResponse) {
@@ -39,6 +40,7 @@ export const getCartByIdFromCookie = async () => {
 			next: {
 				tags: ["cart"],
 			},
+			cache: "no-cache",
 		});
 
 		if (cart) {
@@ -52,6 +54,7 @@ export const getCartByIdFromCookie = async () => {
 export const createOrFindCart = async () => {
 	const graphqlResponse = await executeGraphQL({
 		query: CartCreateDocument,
+		cache: "no-cache",
 	});
 
 	if (!graphqlResponse) {
