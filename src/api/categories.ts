@@ -15,7 +15,9 @@ export const getCategoriesBySlug = async (slug: string) => {
 	const graphqlResponse = await executeGraphQL({
 		query: CategoriesGetItemsBySlugDocument,
 		variables: { slug },
-		cache: "no-cache",
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	if (!graphqlResponse) {

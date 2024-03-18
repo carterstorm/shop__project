@@ -6,7 +6,7 @@ export const getProductById = async (id: ProductsListItemFragment["id"]) => {
 		query: ProductGetItemByIdDocument,
 		variables: { id },
 		next: {
-			revalidate: 15,
+			revalidate: 60 * 60 * 24,
 		},
 	});
 
