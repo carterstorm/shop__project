@@ -5,6 +5,9 @@ export const getCollectionBySlug = async (slug: string) => {
 	const graphqlResponse = await executeGraphQL({
 		query: CollectionGetItemBySlugDocument,
 		variables: { slug },
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	if (!graphqlResponse) {

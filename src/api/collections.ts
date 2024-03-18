@@ -5,6 +5,9 @@ export const getCollections = async (take: number) => {
 	const graphqlResponse = await executeGraphQL({
 		query: CollectionsGetListDocument,
 		variables: { take },
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	if (!graphqlResponse) {
