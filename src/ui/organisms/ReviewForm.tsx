@@ -6,7 +6,7 @@ import { FormField } from "@/ui/molecules/FormField";
 export const ReviewForm = () => {
 	return (
 		<section>
-			<form className="h-auto w-full border-r py-3 pe-4">
+			<form className="h-auto w-full py-3 pe-4">
 				<FormField id="review-title" labelTitle="Review title">
 					<InputElement
 						name="headline"

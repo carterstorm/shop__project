@@ -68,8 +68,8 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 				<SuggestedProducts suggestedProducts={filteredSuggestedProducts} />
 			</Suspense>
 			<article className="ltr grid grid-cols-reviews">
-				<ReviewForm></ReviewForm>
-				<ReviewList></ReviewList>
+				<ReviewForm />
+				<ReviewList params={params}></ReviewList>
 			</article>
 		</section>
 	);

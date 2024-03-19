@@ -382,6 +382,13 @@ export type ProductsGetListLengthQueryVariables = Exact<{ [key: string]: never; 
 
 export type ProductsGetListLengthQuery = { products: { meta: { total: number } } };
 
+export type ReviewGetListQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewGetListQuery = { product?: { reviews: Array<{ id: string, author: string, createdAt: unknown, description: string, email: string, rating: number }> } | null };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -672,3 +679,17 @@ export const ProductsGetListLengthDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetListLengthQuery, ProductsGetListLengthQueryVariables>;
+export const ReviewGetListDocument = new TypedDocumentString(`
+    query ReviewGetList($id: ID!) {
+  product(id: $id) {
+    reviews {
+      id
+      author
+      createdAt
+      description
+      email
+      rating
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewGetListQuery, ReviewGetListQueryVariables>;
