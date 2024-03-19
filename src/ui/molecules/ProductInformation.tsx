@@ -1,7 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { cartAddItem, getOrCreateCart } from "@/api/cart";
 import { type ProductsListItemFragment } from "@/gql/graphql";
-import { AddProductToCartButton } from "@/ui/atoms/AddProductToCartButton";
+import { FormButton } from "@/ui/atoms/FormButton";
 import { SingleProductInfo } from "@/ui/atoms/SingleProductInfo";
 import { SingleProductLongDescription } from "@/ui/atoms/SingleProductLongDescription";
 
@@ -26,7 +26,7 @@ export const ProductInformation = ({ product }: ProductInformationProps) => {
 		<form action={addProductToCartAction} className="flex flex-col items-start gap-6 text-gray-600">
 			<SingleProductInfo product={product} />
 			<SingleProductLongDescription product={product} />
-			<AddProductToCartButton />
+			<FormButton buttonText="Add to cart" />
 		</form>
 	);
 };

@@ -19,6 +19,9 @@ const config: Config = {
 					"100%": { transform: "translateY(0)" },
 				},
 			},
+			gridTemplateColumns: {
+				reviews: "minmax(300px, 1fr) 1.5fr",
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/typography")],

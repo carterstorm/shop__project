@@ -2,7 +2,7 @@
 
 import { useFormStatus } from "react-dom";
 
-export const AddProductToCartButton = () => {
+export const FormButton = ({ buttonText }: { buttonText: string }) => {
 	const { pending } = useFormStatus();
 
 	return (
@@ -16,7 +16,7 @@ export const AddProductToCartButton = () => {
 					<circle className="circleLoader" r="20" cy="50" cx="50"></circle>
 				</svg>
 			) : (
-				"Add to cart"
+				buttonText
 			)}
 		</button>
 	);

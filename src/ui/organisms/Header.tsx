@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/ui/atoms/Logo";
 import { Navigation } from "@/ui/molecules/Navigation";
-import { SearchBar } from "@/ui/atoms/SearchBar";
+import { SearchBar } from "@/ui/molecules/SearchBar";
 import { Cart } from "@/ui/atoms/Cart";
 
 export const Header = () => {

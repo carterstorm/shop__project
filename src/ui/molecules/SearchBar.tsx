@@ -6,6 +6,7 @@ import Link from "next/link";
 import { SearchIcon } from "lucide-react";
 import { type Route } from "next";
 import { useDebounce } from "@/utils/useDebounce";
+import { InputElement } from "@/ui/atoms/InputElement";
 
 export const SearchBar = () => {
 	const router = useRouter();
@@ -50,12 +51,14 @@ export const SearchBar = () => {
 			>
 				<SearchIcon size={20} />
 			</Link>
-			<input
-				className="focus:ring-primary-500 h-10 min-w-60 rounded-xl border ps-8 text-sm transition-all duration-300 ease-in-out focus:border-transparent focus:outline-none focus:ring-2"
-				type="search"
-				placeholder="Type for search..."
+			<InputElement
 				ref={inputRef}
 				onChange={handleChange}
+				name="search"
+				type="search"
+				placeholder="Type for search..."
+				className="ps-8"
+				required={false}
 			/>
 		</form>
 	);

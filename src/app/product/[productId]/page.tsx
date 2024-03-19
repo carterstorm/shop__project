@@ -9,6 +9,8 @@ import {
 	getSuggestedProductsListByFilteredCategory,
 } from "@/api/products";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
+import { ReviewForm } from "@/ui/organisms/ReviewForm";
+import { ReviewList } from "@/ui/organisms/ReviewList";
 
 type SingleProductPageProps = {
 	params: {
@@ -58,13 +60,17 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 
 	return (
 		<section className="mx-auto lg:max-w-7xl lg:px-0">
-			<div className="grid grid-cols-2 gap-8">
+			<section className="grid grid-cols-2 gap-8">
 				<SinglePageProductImage product={product} />
 				<ProductInformation product={product} />
-			</div>
+			</section>
 			<Suspense>
 				<SuggestedProducts suggestedProducts={filteredSuggestedProducts} />
 			</Suspense>
+			<article className="ltr grid grid-cols-reviews">
+				<ReviewForm></ReviewForm>
+				<ReviewList></ReviewList>
+			</article>
 		</section>
 	);
 }
