@@ -1,8 +1,8 @@
 "use client";
 
 import { useOptimistic } from "react";
-import { ReviewList } from "@/ui/organisms/ReviewList";
-import { ReviewUserForm } from "@/ui/organisms/ReviewUserForm";
+import { ReviewUserForm } from "@/ui/molecules/ReviewUserForm";
+import { ReviewList } from "@/ui/molecules/ReviewList";
 import { type ReviewWithOptionalId } from "@/types";
 
 type ReviewsProps = {

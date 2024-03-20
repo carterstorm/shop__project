@@ -5,6 +5,9 @@ export const getAllReviewsByProductId = async (productId: ReviewItemFragment["id
 	const graphqlResponse = await executeGraphQL({
 		query: ReviewGetListDocument,
 		variables: { id: productId },
+		next: {
+			tags: ["reviews"],
+		},
 	});
 
 	if (!graphqlResponse) {

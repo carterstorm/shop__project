@@ -34,7 +34,7 @@ export const handleAddReviewAction = async (reviewData: ReviewData) => {
 		throw new Error("Failed to send reviews");
 	}
 
-	revalidateTag("product");
+	revalidateTag("reviews");
 
 	return graphqlResponse.reviewCreate;
 };
