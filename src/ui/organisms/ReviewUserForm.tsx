@@ -4,10 +4,15 @@ import { FormField } from "@/ui/molecules/FormField";
 import { handleAddReviewAction } from "@/app/product/[productId]/actions";
 import { type ReviewItemFragment } from "@/gql/graphql";
 
+type ReviewWithOptionalId = Partial<Pick<ReviewItemFragment, "id">> &
+	Omit<ReviewItemFragment, "id">;
+
 type ReviewUserFormProps = {
 	productId: string;
 	setOptimisticReviews: (
-		action: ReviewItemFragment[] | ((pendingState: ReviewItemFragment[]) => ReviewItemFragment[]),
+		action:
+			| ReviewWithOptionalId[]
+			| ((pendingState: ReviewWithOptionalId[]) => ReviewWithOptionalId[]),
 	) => void;
 };
 
@@ -48,18 +53,16 @@ export const ReviewUserForm = ({ setOptimisticReviews, productId }: ReviewUserFo
 			</FormField>
 			<div className="mt-4 flex justify-end">
 				<button
+					className="flex h-14 w-32 items-center justify-center rounded-xl bg-blue-500 px-6 py-4 text-sm text-white transition-all hover:bg-blue-400  disabled:bg-blue-600"
 					formAction={async (formData: FormData) => {
 						const reviewData = {
-							id: Math.random().toString(),
 							title: String(formData.get("headline")),
 							description: String(formData.get("content")),
 							author: String(formData.get("name")),
 							email: String(formData.get("email")),
 							rating: Number(formData.get("rating")),
 							createdAt: new Date().toISOString(),
-							product: {
-								id: productId,
-							},
+							productId: productId,
 						};
 						setOptimisticReviews((prev) => [...prev, reviewData]);
 						await handleAddReviewAction(reviewData);

@@ -1,13 +1,13 @@
 "use client";
 
 import { useOptimistic } from "react";
-import { type ReviewItemFragment } from "@/gql/graphql";
 import { ReviewList } from "@/ui/organisms/ReviewList";
 import { ReviewUserForm } from "@/ui/organisms/ReviewUserForm";
+import { type ReviewWithOptionalId } from "@/types";
 
 type ReviewsProps = {
 	productId: string;
-	reviews: ReviewItemFragment[];
+	reviews: ReviewWithOptionalId[];
 };
 
 export const Reviews = ({ reviews, productId }: ReviewsProps) => {

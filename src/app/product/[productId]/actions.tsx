@@ -11,14 +11,11 @@ type ReviewData = {
 	email: string;
 	rating: number;
 	createdAt: string;
-	product: {
-		id: string;
-	};
+	productId: string;
 };
 
 export const handleAddReviewAction = async (reviewData: ReviewData) => {
-	const { title, description, author, email, rating, createdAt, product } = reviewData;
-	const { id: productId } = product;
+	const { title, description, author, email, rating, createdAt, productId } = reviewData;
 
 	const graphqlResponse = await executeGraphQL({
 		query: ReviewCreateDocument,

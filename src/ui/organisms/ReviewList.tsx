@@ -1,7 +1,7 @@
-import { type ReviewItemFragment } from "@/gql/graphql";
+import { type ReviewWithOptionalId } from "@/types";
 
 type ReviewListProps = {
-	reviews: ReviewItemFragment[];
+	reviews: ReviewWithOptionalId[];
 };
 
 export const ReviewList = ({ reviews }: ReviewListProps) => {
