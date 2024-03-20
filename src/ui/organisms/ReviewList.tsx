@@ -13,9 +13,15 @@ export const ReviewList = async ({ params }: ReviewListProps) => {
 		return;
 	}
 
+	const sortProducts = reviews.product?.reviews.sort((data1, data2) => {
+		return (
+			new Date(data2.createdAt as string).getTime() - new Date(data1.createdAt as string).getTime()
+		);
+	});
+
 	return (
 		<ul className="h-dvh w-full ">
-			{reviews.product?.reviews.map((review) => (
+			{sortProducts?.map((review) => (
 				<li key={review.id} className="mx-2 w-full border-b p-6">
 					<div className="flex justify-between">
 						<div>
