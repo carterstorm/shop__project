@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { SearchIcon } from "lucide-react";
-import { type Route } from "next";
 import { useDebounce } from "@/utils/useDebounce";
 import { InputElement } from "@/ui/atoms/InputElement";
 
@@ -12,7 +10,7 @@ export const SearchBar = () => {
 	const router = useRouter();
 	const [search, setSearch] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
-	const debouncedSearch = useDebounce(search);
+	const debouncedSearch = useDebounce(search, 500);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const trimmedValue = event.target.value.trim();
@@ -25,32 +23,15 @@ export const SearchBar = () => {
 		}
 	};
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const trimmedInputValue = inputRef.current?.value.trim();
-
-		if ((trimmedInputValue?.length ?? 0) > 1) {
-			setSearch(trimmedInputValue ?? "");
-		} else if ((trimmedInputValue?.length ?? 0) <= 1) {
-			setSearch("");
-			router.push("/products");
-		}
-	};
-
 	useEffect(() => {
-		if (debouncedSearch.trim()) {
-			router.push(`/search?query=${debouncedSearch}` as Route);
+		if (debouncedSearch.trim().length > 1) {
+			router.push(`/search?query=${debouncedSearch}`);
 		}
 	}, [debouncedSearch, router]);
 
 	return (
-		<form className="ltr relative flex items-center" onSubmit={handleSubmit}>
-			<Link
-				className="absolute left-2 top-1/2 -translate-y-1/2 transform"
-				href={`${search.length <= 1 ? "/products" : `/search?query=${search}`}` as Route}
-			>
-				<SearchIcon size={20} />
-			</Link>
+		<div className="ltr relative flex items-center">
+			<SearchIcon className="absolute left-2 top-1/2 -translate-y-1/2 transform" size={20} />
 			<InputElement
 				ref={inputRef}
 				onChange={handleChange}
@@ -60,6 +41,6 @@ export const SearchBar = () => {
 				className="ps-8"
 				required={false}
 			/>
-		</form>
+		</div>
 	);
 };
