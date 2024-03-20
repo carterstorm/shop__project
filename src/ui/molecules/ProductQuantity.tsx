@@ -26,7 +26,9 @@ export const ProductQuantity = ({ quantity, cartId, productId }: ProductQuantity
 				</QuantityButton>
 			)}
 			{optimisticQuantity === 1 && <QuantityButtonRemove cartId={cartId} productId={productId} />}
-			<span className="inline-block w-10">{quantity}</span>
+			<span className="inline-block w-10" data-testid="quantity">
+				{optimisticQuantity}
+			</span>
 			<QuantityButton
 				setOptimisticQuantity={setOptimisticQuantity}
 				optimisticQuantity={optimisticQuantity}

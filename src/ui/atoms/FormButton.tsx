@@ -7,6 +7,7 @@ export const FormButton = ({ buttonText }: { buttonText: string }) => {
 
 	return (
 		<button
+			data-testid="add-to-cart-button"
 			disabled={pending}
 			type="submit"
 			className="flex h-14 w-32 items-center justify-center rounded-xl bg-blue-500 px-6 py-4 text-sm text-white transition-all hover:bg-blue-400  disabled:bg-blue-600"

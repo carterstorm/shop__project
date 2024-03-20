@@ -17,6 +17,7 @@ export const QuantityButton = ({
 }: QuantityButtonProps) => {
 	return (
 		<button
+			data-testid={children === "+" ? "increment" : "decrement"}
 			formAction={async () => {
 				setOptimisticQuantity(optimisticQuantity + (children === "+" ? 1 : -1));
 				await changeProductQuantity(
