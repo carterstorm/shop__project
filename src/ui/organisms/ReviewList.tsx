@@ -1,19 +1,11 @@
-import { getAllReviewsByProductId } from "@/api/review";
+import { type ReviewItemFragment } from "@/gql/graphql";
 
 type ReviewListProps = {
-	params: {
-		productId: string;
-	};
+	reviews: ReviewItemFragment[];
 };
 
-export const ReviewList = async ({ params }: ReviewListProps) => {
-	const reviews = await getAllReviewsByProductId(params.productId);
-
-	if (!reviews) {
-		return;
-	}
-
-	const sortProducts = reviews.product?.reviews.sort((data1, data2) => {
+export const ReviewList = ({ reviews }: ReviewListProps) => {
+	const sortProducts = reviews.sort((data1, data2) => {
 		return (
 			new Date(data2.createdAt as string).getTime() - new Date(data1.createdAt as string).getTime()
 		);
@@ -40,6 +32,7 @@ export const ReviewList = async ({ params }: ReviewListProps) => {
 							<span className="text-sm">Rate: {review.rating} / 5</span>
 						</div>
 					</div>
+					<h3>{review.title}</h3>
 					<p className="py-4 text-sm leading-6">{review.description}</p>
 				</li>
 			))}

@@ -9,8 +9,8 @@ import {
 	getSuggestedProductsListByFilteredCategory,
 } from "@/api/products";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
-import { ReviewForm } from "@/ui/organisms/ReviewForm";
-import { ReviewList } from "@/ui/organisms/ReviewList";
+import { Reviews } from "@/ui/organisms/Reviews";
+import { getAllReviewsByProductId } from "@/api/review";
 
 type SingleProductPageProps = {
 	params: {
@@ -48,9 +48,14 @@ export const generateMetadata = async ({
 export default async function SingleProductPage({ params }: SingleProductPageProps) {
 	const product = await getProductById(params.productId);
 	const { numberOfAllProducts } = await getNumberOfAllProductsAndAllPages();
+	const reviews = await getAllReviewsByProductId(params.productId);
 
 	if (!product) {
 		return notFound();
+	}
+
+	if (!reviews) {
+		return;
 	}
 
 	const filteredSuggestedProducts = await getSuggestedProductsListByFilteredCategory(
@@ -67,10 +72,7 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 			<Suspense>
 				<SuggestedProducts suggestedProducts={filteredSuggestedProducts} />
 			</Suspense>
-			<article className="ltr grid grid-cols-reviews">
-				<ReviewForm />
-				<ReviewList params={params}></ReviewList>
-			</article>
+			<Reviews reviews={reviews} productId={params.productId} />
 		</section>
 	);
 }

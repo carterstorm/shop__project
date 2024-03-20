@@ -1,7 +1,7 @@
-import { ReviewGetListDocument } from "@/gql/graphql";
+import { ReviewGetListDocument, type ReviewItemFragment } from "@/gql/graphql";
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
-export const getAllReviewsByProductId = async (productId: string) => {
+export const getAllReviewsByProductId = async (productId: ReviewItemFragment["id"]) => {
 	const graphqlResponse = await executeGraphQL({
 		query: ReviewGetListDocument,
 		variables: { id: productId },
@@ -11,5 +11,5 @@ export const getAllReviewsByProductId = async (productId: string) => {
 		throw new Error("Failed to fetch reviews");
 	}
 
-	return graphqlResponse;
+	return graphqlResponse.product?.reviews;
 };
