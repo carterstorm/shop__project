@@ -48,7 +48,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
 	return (
 		<>
 			<PageHeader>
-				<PageHeaderHeading>all products</PageHeaderHeading>
+				<PageHeaderHeading>All Products</PageHeaderHeading>
 			</PageHeader>
 			<div className="flex w-full justify-end ">
 				<ProductsSort />
