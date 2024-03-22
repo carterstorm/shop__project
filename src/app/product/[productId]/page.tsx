@@ -9,6 +9,8 @@ import {
 	getSuggestedProductsListByFilteredCategory,
 } from "@/api/products";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
+import { Reviews } from "@/ui/organisms/Reviews";
+import { getAllReviewsByProductId } from "@/api/review";
 
 type SingleProductPageProps = {
 	params: {
@@ -46,9 +48,14 @@ export const generateMetadata = async ({
 export default async function SingleProductPage({ params }: SingleProductPageProps) {
 	const product = await getProductById(params.productId);
 	const { numberOfAllProducts } = await getNumberOfAllProductsAndAllPages();
+	const reviews = await getAllReviewsByProductId(params.productId);
 
 	if (!product) {
 		return notFound();
+	}
+
+	if (!reviews) {
+		return;
 	}
 
 	const filteredSuggestedProducts = await getSuggestedProductsListByFilteredCategory(
@@ -58,13 +65,14 @@ export default async function SingleProductPage({ params }: SingleProductPagePro
 
 	return (
 		<section className="mx-auto lg:max-w-7xl lg:px-0">
-			<div className="grid grid-cols-2 gap-8">
+			<section className="grid grid-cols-2 gap-8">
 				<SinglePageProductImage product={product} />
 				<ProductInformation product={product} />
-			</div>
+			</section>
 			<Suspense>
 				<SuggestedProducts suggestedProducts={filteredSuggestedProducts} />
 			</Suspense>
+			<Reviews reviews={reviews} productId={params.productId} />
 		</section>
 	);
 }

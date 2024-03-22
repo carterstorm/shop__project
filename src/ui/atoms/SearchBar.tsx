@@ -11,7 +11,7 @@ export const SearchBar = () => {
 	const router = useRouter();
 	const [search, setSearch] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
-	const debouncedSearch = useDebounce(search);
+	const debouncedSearch = useDebounce(search, 500);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const trimmedValue = event.target.value.trim();
