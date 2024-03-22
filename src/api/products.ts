@@ -4,7 +4,9 @@ import {
 	ProductsGetListBySearchDocument,
 	ProductsGetListDocument,
 	ProductsGetListLengthDocument,
+	type SortDirection,
 	type ProductsListItemFragment,
+	type ProductSortBy,
 } from "@/gql/graphql";
 import { executeGraphQL } from "@/utils/executeGraphQL";
 
@@ -21,10 +23,15 @@ export const getNumberOfAllProductsAndAllPages = async () => {
 	return { numberOfAllProducts, numberOfAllPages };
 };
 
-export const getProductsList = async (take: number = 4, skip: number = 0) => {
+export const getProductsList = async (
+	take: number = 4,
+	skip: number = 0,
+	order?: SortDirection,
+	orderBy?: ProductSortBy,
+) => {
 	const graphqlResponse = await executeGraphQL({
 		query: ProductsGetListDocument,
-		variables: { take, skip },
+		variables: { take, skip, order, orderBy },
 		next: {
 			revalidate: 10,
 		},

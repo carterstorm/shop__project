@@ -26,6 +26,18 @@ export const ReviewUserForm = ({ setOptimisticReviews, productId }: ReviewUserFo
 				<input type="radio" id="rating" name="rating" value={2} />
 				<label htmlFor="rating">2</label>
 			</div>
+			<div>
+				<input type="radio" id="rating" name="rating" value={3} />
+				<label htmlFor="rating">3</label>
+			</div>
+			<div>
+				<input type="radio" id="rating" name="rating" value={4} />
+				<label htmlFor="rating">4</label>
+			</div>
+			<div>
+				<input type="radio" id="rating" name="rating" value={5} />
+				<label htmlFor="rating">5</label>
+			</div>
 
 			<FormField id="user-name" labelTitle="User name">
 				<InputElement name="name" placeholder="Enter your name" id="user-name" required={true} />
