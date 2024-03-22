@@ -7,6 +7,7 @@ type PaginationProps = {
 	siblings?: number;
 	numberOfAllPages: number;
 	path: string;
+	searchParams?: { [key: string]: string | undefined };
 };
 
 export const Pagination = ({
@@ -14,6 +15,7 @@ export const Pagination = ({
 	siblings = 2,
 	numberOfAllPages,
 	path,
+	searchParams,
 }: PaginationProps) => {
 	const firstPage = 1;
 	const siblingsArray = [...Array(siblings).keys()];
@@ -25,17 +27,30 @@ export const Pagination = ({
 		.map((sibling) => activePageNumber + sibling + 1)
 		.filter((page) => page <= numberOfAllPages);
 
+	let paramsElements = Object.keys(searchParams ?? {})
+		.map((key) => `${key}=${searchParams?.[key]}`)
+		.join("&");
+
+	paramsElements = "?" + paramsElements;
+
 	return (
 		<nav className="flex justify-center">
 			<ul className="flex items-center gap-6" aria-label="pagination">
 				{activePageNumber >= 4 && (
-					<ActiveLink href={`/${path}/${firstPage}` as Route} activePageNumber={activePageNumber}>
+					<ActiveLink
+						href={
+							`/${path}/${firstPage}${paramsElements.length > 1 ? paramsElements : ""}` as Route
+						}
+						activePageNumber={activePageNumber}
+					>
 						<ChevronsLeft strokeWidth={1} size={30} />
 					</ActiveLink>
 				)}
 				{activePageNumber !== firstPage && (
 					<ActiveLink
-						href={`/${path}/${activePageNumber - 1}` as Route}
+						href={
+							`/${path}/${activePageNumber - 1}${paramsElements.length > 1 ? paramsElements : ""}` as Route
+						}
 						activePageNumber={activePageNumber}
 					>
 						<ChevronLeft strokeWidth={1} size={30} />
@@ -46,7 +61,7 @@ export const Pagination = ({
 						<ActiveLink
 							activePageNumber={activePageNumber}
 							key={index}
-							href={`/${path}/${page}` as Route}
+							href={`/${path}/${page}${paramsElements.length > 1 ? paramsElements : ""}` as Route}
 							className="font-medium"
 							activeClassName="text-slate-100 bg-blue-500 rounded-md px-3 py-1"
 						>
@@ -56,7 +71,9 @@ export const Pagination = ({
 				})}
 				{activePageNumber !== numberOfAllPages && (
 					<ActiveLink
-						href={`/${path}/${activePageNumber + 1}` as Route}
+						href={
+							`/${path}/${activePageNumber + 1}${paramsElements.length > 1 ? paramsElements : ""}` as Route
+						}
 						activePageNumber={activePageNumber}
 					>
 						<ChevronRight strokeWidth={1} size={30} />
@@ -64,7 +81,9 @@ export const Pagination = ({
 				)}
 				{activePageNumber <= numberOfAllPages - 3 && (
 					<ActiveLink
-						href={`/${path}/${numberOfAllPages}` as Route}
+						href={
+							`/${path}/${numberOfAllPages}${paramsElements.length > 1 ? paramsElements : ""}` as Route
+						}
 						activePageNumber={activePageNumber}
 					>
 						<ChevronsRight strokeWidth={1} size={30} />

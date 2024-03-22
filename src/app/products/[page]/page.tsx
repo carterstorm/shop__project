@@ -60,6 +60,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
 					path="products"
 					activePageNumber={activePageNumber}
 					numberOfAllPages={numberOfAllPages}
+					searchParams={searchParams}
 				/>
 			</div>
 		</>
