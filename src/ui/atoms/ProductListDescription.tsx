@@ -20,7 +20,7 @@ export const ProductListDescription = ({ product }: ProductDescriptionProps) => 
 				<ProductDynamicStarAndNumberRating
 					product={product}
 					starSize={12}
-					hideNumberRating={true}
+					ratingProductTextSize="text-[9px]"
 				/>
 			</div>
 		</div>

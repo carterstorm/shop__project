@@ -23,13 +23,13 @@ export const ReviewRatingOptions = () => {
 		<div className="my-2 flex items-center gap-1 text-sm">
 			<span className="text-slate-600">Select rating:</span>
 			{reviewOptions.map((option) => (
-				<div key={option.value}>
+				<div key={option.value} className="relative overflow-hidden">
 					<input
 						type="radio"
 						id={`rating-${option.value}`}
 						name="rating"
 						value={option.value}
-						className="hidden"
+						className="-lef-1/2 absolute -top-2/3"
 					/>
 					<label
 						htmlFor={`rating-${option.value}`}

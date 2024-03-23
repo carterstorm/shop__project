@@ -1,14 +1,15 @@
 import { Star } from "lucide-react";
+import clsx from "clsx";
 import { type ProductsListItemFragment } from "@/gql/graphql";
 
 export const ProductDynamicStarAndNumberRating = ({
 	product,
 	starSize,
-	hideNumberRating,
+	ratingProductTextSize,
 }: {
 	product: ProductsListItemFragment;
 	starSize?: number;
-	hideNumberRating?: boolean;
+	ratingProductTextSize?: string;
 }) => {
 	const fullStars = Math.floor(product.rating ?? 0);
 	const partialStar = ((product.rating ?? 0) % 1) * 100;
@@ -39,11 +40,9 @@ export const ProductDynamicStarAndNumberRating = ({
 					}
 				})}
 			</div>
-			{!hideNumberRating && (
-				<span data-testid="product-rating" className="text-sm text-slate-500">
-					{product.rating?.toFixed(2)}/{numberOfStars}
-				</span>
-			)}
+			<div className={clsx("text-sm text-slate-500", ratingProductTextSize)}>
+				<span data-testid="product-rating">{product.rating?.toFixed(2)}</span>/{numberOfStars}
+			</div>
 		</div>
 	);
 };
