@@ -3,6 +3,7 @@ import { TextArea } from "@/ui/atoms/TextArea";
 import { FormField } from "@/ui/molecules/FormField";
 import { ReviewAddButton } from "@/ui/atoms/ReviewAddButton";
 import { type ReviewUserFormProps } from "@/types";
+import { ReviewRatingOptions } from "@/ui/atoms/ReviewRatingOptions";
 
 export const ReviewUserForm = ({ setOptimisticReviews, productId }: ReviewUserFormProps) => {
 	return (
@@ -18,27 +19,7 @@ export const ReviewUserForm = ({ setOptimisticReviews, productId }: ReviewUserFo
 			<FormField id="content" labelTitle="Review message">
 				<TextArea required={true} name="content" id="content" />
 			</FormField>
-			<div>
-				<input type="radio" id="rating" name="rating" value={1} />
-				<label htmlFor="rating">1</label>
-			</div>
-			<div>
-				<input type="radio" id="rating" name="rating" value={2} />
-				<label htmlFor="rating">2</label>
-			</div>
-			<div>
-				<input type="radio" id="rating" name="rating" value={3} />
-				<label htmlFor="rating">3</label>
-			</div>
-			<div>
-				<input type="radio" id="rating" name="rating" value={4} />
-				<label htmlFor="rating">4</label>
-			</div>
-			<div>
-				<input type="radio" id="rating" name="rating" value={5} />
-				<label htmlFor="rating">5</label>
-			</div>
-
+			<ReviewRatingOptions />
 			<FormField id="user-name" labelTitle="User name">
 				<InputElement name="name" placeholder="Enter your name" id="user-name" required={true} />
 			</FormField>
