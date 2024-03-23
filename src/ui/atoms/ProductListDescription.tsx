@@ -1,4 +1,5 @@
 import { type ProductsListItemFragment } from "@/gql/graphql";
+import { ProductDynamicStarAndNumberRating } from "@/ui/atoms/ProductDynamicStarAndNumberRating";
 import { formatMoney } from "@/utils/formatMoney";
 
 type ProductDescriptionProps = {
@@ -12,10 +13,16 @@ export const ProductListDescription = ({ product }: ProductDescriptionProps) => 
 				<h3 className="text-sm  font-semibold text-blue-400">{product.name}</h3>
 				<p className="text-sm text-gray-500">{product.categories[0].name}</p>
 			</div>
-			<p className="text-sm font-medium text-gray-900" data-testid="product-price">
-				{formatMoney(product.price)}
-			</p>
-			<p data-testid="product-rating">{product.rating?.toFixed(1)}</p>
+			<div className="flex flex-col items-end justify-center">
+				<p className="text-sm font-medium text-gray-900" data-testid="product-price">
+					{formatMoney(product.price)}
+				</p>
+				<ProductDynamicStarAndNumberRating
+					product={product}
+					starSize={12}
+					hideNumberRating={true}
+				/>
+			</div>
 		</div>
 	);
 };
