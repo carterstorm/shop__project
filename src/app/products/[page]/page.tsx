@@ -50,7 +50,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
 			<PageHeader>
 				<PageHeaderHeading>All Products</PageHeaderHeading>
 			</PageHeader>
-			<div className="flex w-full justify-end ">
+			<div className="mx-auto flex w-full justify-end lg:max-w-7xl lg:px-0">
 				<ProductsSort />
 			</div>
 

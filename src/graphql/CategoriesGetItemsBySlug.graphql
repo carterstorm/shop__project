@@ -9,6 +9,7 @@ query CategoriesGetItemsBySlug($slug: String) {
 			name
 			price
 			description
+			rating
 			images {
 				url
 			}
