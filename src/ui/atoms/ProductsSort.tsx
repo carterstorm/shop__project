@@ -24,7 +24,11 @@ export const ProductsSort = () => {
 	);
 
 	return (
-		<select onChange={setSelectedSortValue} value={selectedSortValue} className="justify-self-end">
+		<select
+			onChange={setSelectedSortValue}
+			value={selectedSortValue}
+			className="focus:ring-primary-500 h-10 justify-self-end rounded-lg border px-3 text-xs transition-all duration-300 ease-in-out placeholder:text-xs focus:border-transparent focus:outline-none focus:ring-2"
+		>
 			{sortOptions.map((option, index) => (
 				<option
 					key={option.id}
