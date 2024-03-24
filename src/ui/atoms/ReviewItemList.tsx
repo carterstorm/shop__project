@@ -1,4 +1,5 @@
 import { type ReviewWithOptionalId } from "@/types";
+import { ProductDynamicStarAndNumberRating } from "@/ui/atoms/ProductDynamicStarAndNumberRating";
 
 export const ReviewItemList = ({ review }: { review: ReviewWithOptionalId }) => {
 	const reviewDate = new Date(review.createdAt as string).toLocaleDateString("en-US", {
@@ -15,8 +16,13 @@ export const ReviewItemList = ({ review }: { review: ReviewWithOptionalId }) => 
 					<span className="text-sm">{review.email}</span>
 				</div>
 				<div className="flex flex-col">
-					<span className="text-sm">Date: {reviewDate}</span>
-					<span className="text-sm">Rate: {review.rating} / 5</span>
+					<span className="text-sm">{reviewDate}</span>
+					<ProductDynamicStarAndNumberRating
+						rating={review.rating}
+						starSize={16}
+						fixedRating={false}
+						ratingProductTextSize="text-xs"
+					/>
 				</div>
 			</div>
 			<h3>{review.title}</h3>

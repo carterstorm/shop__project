@@ -18,9 +18,10 @@ export const ProductListDescription = ({ product }: ProductDescriptionProps) => 
 					{formatMoney(product.price)}
 				</p>
 				<ProductDynamicStarAndNumberRating
-					product={product}
+					rating={product.rating}
 					starSize={12}
 					ratingProductTextSize="text-[9px]"
+					fixedRating={true}
 				/>
 			</div>
 		</div>

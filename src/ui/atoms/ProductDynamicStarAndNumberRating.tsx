@@ -1,24 +1,25 @@
 import { Star } from "lucide-react";
 import clsx from "clsx";
-import { type ProductsListItemFragment } from "@/gql/graphql";
+import { maxRatingOptions } from "@/constants";
 
 export const ProductDynamicStarAndNumberRating = ({
-	product,
+	rating,
 	starSize,
 	ratingProductTextSize,
+	fixedRating,
 }: {
-	product: ProductsListItemFragment;
+	rating: number | null | undefined;
 	starSize?: number;
 	ratingProductTextSize?: string;
+	fixedRating?: boolean;
 }) => {
-	const fullStars = Math.floor(product.rating ?? 0);
-	const partialStar = ((product.rating ?? 0) % 1) * 100;
-	const numberOfStars = 5;
+	const fullStars = Math.floor(rating ?? 0);
+	const partialStar = ((rating ?? 0) % 1) * 100;
 
 	return (
 		<div className="flex items-center gap-2">
 			<div className="flex">
-				{Array.from({ length: numberOfStars }).map((_, index) => {
+				{Array.from({ length: maxRatingOptions }).map((_, index) => {
 					if (index < fullStars) {
 						return <Star key={index} fill="#FBBF24" stroke="#FBBF24" size={starSize} />;
 					} else if (index === fullStars && partialStar > 0) {
@@ -41,7 +42,8 @@ export const ProductDynamicStarAndNumberRating = ({
 				})}
 			</div>
 			<div className={clsx("text-sm text-slate-500", ratingProductTextSize)}>
-				<span data-testid="product-rating">{product.rating?.toFixed(2)}</span>/{numberOfStars}
+				<span data-testid="product-rating">{rating?.toFixed(fixedRating ? 2 : 0)}</span>/
+				{maxRatingOptions}
 			</div>
 		</div>
 	);

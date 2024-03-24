@@ -321,7 +321,7 @@ export type CategoriesGetItemsBySlugQueryVariables = Exact<{
 }>;
 
 
-export type CategoriesGetItemsBySlugQuery = { category?: { id: string, name: string, description: string, slug: string, products: Array<{ id: string, name: string, price: number, description: string, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
+export type CategoriesGetItemsBySlugQuery = { category?: { id: string, name: string, description: string, slug: string, products: Array<{ id: string, name: string, price: number, description: string, rating?: number | null, images: Array<{ url: string }>, categories: Array<{ name: string, description: string }> }> } | null };
 
 export type CategoriesGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -562,6 +562,7 @@ export const CategoriesGetItemsBySlugDocument = new TypedDocumentString(`
       name
       price
       description
+      rating
       images {
         url
       }

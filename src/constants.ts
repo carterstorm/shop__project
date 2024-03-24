@@ -5,3 +5,6 @@ export const numberOfAllProductsByPage = 8;
 
 //number of products to display by category page
 export const numberOfProductsByCategoryPage = 4;
+
+//max number of rating options
+export const maxRatingOptions = 5;
